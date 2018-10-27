@@ -1,5 +1,4 @@
 var mongoose = require('mongoose')
-const validator = require('validator')
 const _ = require('lodash')
 
 var BookSchema = new mongoose.Schema({
