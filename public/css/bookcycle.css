@@ -7,7 +7,7 @@
 
 .header-with-jumbotron::after {
 	content: '';
-	background-image: url(../images/bulb.png);
+	/* background-image: url(../images/bulb.png); */
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 200px;
