@@ -1,0 +1,40 @@
+.header-with-jumbotron {
+	background-image: url('../images/bg-normal.jpg');
+	min-height: 900px;
+	color: #FFF;
+	position: relative;
+}
+
+.header-with-jumbotron::after {
+	content: '';
+	background-image: url(../images/bulb.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 200px;
+	height: 200px;
+	margin-left: -100px;
+	position: absolute;
+	left: 50%;
+	top: 0;
+}
+
+.home-after-nav-content {
+	position: relative;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.home-after-nav-content img {
+	max-width: 100%;
+}
+
+.home-after-nav-content .tt {
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+@media (min-width: 768px) {
+	.home-after-nav-content {
+		margin-top: 150px;
+	}
+}
