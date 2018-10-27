@@ -1,34 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>BookCycle</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/css/custom.css">
+	<title>Bookcycle</title>
+	<link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.css">
 </head>
 <body>
-
-    <div style="margin:50px;">
-        <nav class="navbar navbar-inverse navbar-static-top">
-          <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/buy">Books</a></li>
-                <li><a href="/sell">Sell</a></li>
-              <% if (!currentUser) { %>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/signup">Signup</a></li>
-             <% } else { %>
-                <li><a href="/">Logged in as <%= currentUser.username %></a></li>
-                <li><a href="/logout">Logout</a></li>
-             <% } %>
-              
-              
-              
-              
-            </ul>
-          </div>
-        </nav>
