@@ -1,23 +1,14 @@
 <% include partials/header %>
 
-    <div class="jumbotron"  style="padding:40px;">
-      
-      <form action="/login" method="POST">
-        <h2>Login</h2>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Username</label>
-          <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Log In</button>
-      </form>
-    </div>
-  </div>
-  <% include partials/footer %>
+	<% include partials/main-nav %>
+
+	<section class="container">
+
+		<div class="card bookcycle-card bg-transparent">
+			<h1 class="page-header text-center">Login</h1>
+			<% include partials/login-form %>
+		</div>
+
+	</section>
+
+<% include partials/footer %>

@@ -1,13 +1,15 @@
-.header-with-jumbotron {
+body {
 	background-image: url('../images/bg-normal.jpg');
-	min-height: 900px;
-	color: #FFF;
-	position: relative;
 }
 
-.header-with-jumbotron::after {
-	content: '';
-	/* background-image: url(../images/bulb.png); */
+.bookcycle-header {
+	position: relative;
+	margin-bottom: 115px;
+}
+
+.bookcycle-header::after {
+	content: none;
+	background-image: url(../images/bulb.png);
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 200px;
@@ -18,23 +20,83 @@
 	top: 0;
 }
 
-.home-after-nav-content {
+.bookcycle-jumbotron {
+	color: #FFF;
 	position: relative;
 	text-transform: uppercase;
 	text-align: center;
 }
 
-.home-after-nav-content img {
+.bookcycle-jumbotron img {
 	max-width: 100%;
 }
 
-.home-after-nav-content .tt {
+.bookcycle-jumbotron .tt {
 	font-size: 1.4em;
 	font-weight: bold;
 }
 
+.page-header {
+	color: #FFF;
+	margin-bottom: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.bookcycle-card {
+	color: #FFF;
+	border-color: #FFF;
+	margin-bottom: 50px;
+}
+
+.bookcycle-card ::placeholder {
+	color: #FFF;
+}
+
+.bookcycle-card input[type="email"],
+.bookcycle-card input[type="password"],
+.bookcycle-card input[type="text"] {
+	background-color: transparent;
+	color: #FFF;
+}
+
+.bookcycle-btn {
+	background-color: #ae0c00;
+	color: #FFF;
+	border-color: #FFF;
+/*	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+	        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+	text-transform: uppercase;*/
+}
+
 @media (min-width: 768px) {
-	.home-after-nav-content {
-		margin-top: 150px;
+	.bookcycle-jumbotron {
+		margin-top: 250px;
+	}
+
+	.bookcycle-jumbotron .desk,
+	.bookcycle-jumbotron .rocket,
+	.bookcycle-jumbotron .stack {
+		margin-bottom: 100px;
+	}
+
+	.bookcycle-jumbotron .rocket {
+		margin-top: 100px;
+	}
+
+	.bookcycle-card {
+		padding: 70px 90px 75px;
+	}
+}
+
+@media (max-width: 767px) {
+	.bookcycle-jumbotron .desk,
+	.bookcycle-jumbotron .rocket,
+	.bookcycle-jumbotron .stack {
+		margin-bottom: 50px;
+	}
+
+	.bookcycle-card {
+		padding: 15px;
 	}
 }
