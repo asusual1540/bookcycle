@@ -1,102 +1,107 @@
 body {
-	background-image: url('../images/bg-normal.jpg');
+  background-image: url("../images/bg-pattern.svg");
 }
 
 .bookcycle-header {
-	position: relative;
-	margin-bottom: 115px;
+  position: relative;
+  margin-bottom: 115px;
+  border-bottom: 1px solid white;
 }
 
 .bookcycle-header::after {
-	content: none;
-	background-image: url(../images/bulb.png);
-	background-size: contain;
-	background-repeat: no-repeat;
-	width: 200px;
-	height: 200px;
-	margin-left: -100px;
-	position: absolute;
-	left: 50%;
-	top: 0;
+  content: none;
+  background-image: url(../images/bulb.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  margin-left: -100px;
+  position: absolute;
+  left: 50%;
+  top: 0;
 }
 
 .bookcycle-jumbotron {
-	color: #FFF;
-	position: relative;
-	text-transform: uppercase;
-	text-align: center;
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .bookcycle-jumbotron img {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 .bookcycle-jumbotron .tt {
-	font-size: 1.4em;
-	font-weight: bold;
+  font-size: 1.4em;
+  font-weight: bold;
 }
 
 .page-header {
-	color: #FFF;
-	margin-bottom: 30px;
-	text-transform: uppercase;
-	font-weight: bold;
+  color: #fff;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .bookcycle-card {
-	color: #FFF;
-	border-color: #FFF;
-	margin-bottom: 50px;
+  color: #fff;
+  border-color: #fff;
+  margin-bottom: 50px;
 }
 
 .bookcycle-card ::placeholder {
-	color: #FFF;
+  color: #fff;
 }
 
 .bookcycle-card input[type="email"],
 .bookcycle-card input[type="password"],
 .bookcycle-card input[type="text"] {
-	background-color: transparent;
-	color: #FFF;
+  background-color: transparent;
+  color: #fff;
 }
 
 .bookcycle-btn {
-	background-color: #ae0c00;
-	color: #FFF;
-	border-color: #FFF;
-/*	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  background-color: #ae0c00;
+  color: #fff;
+  border-color: #fff;
+  /*	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 	        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 	text-transform: uppercase;*/
 }
 
 @media (min-width: 768px) {
-	.bookcycle-jumbotron {
-		margin-top: 250px;
-	}
+  .bookcycle-jumbotron {
+    margin-top: 0px;
+  }
 
-	.bookcycle-jumbotron .desk,
-	.bookcycle-jumbotron .rocket,
-	.bookcycle-jumbotron .stack {
-		margin-bottom: 100px;
-	}
+  .bookcycle-jumbotron .desk,
+  .bookcycle-jumbotron .rocket,
+  .bookcycle-jumbotron .stack {
+    margin-bottom: 100px;
+  }
 
-	.bookcycle-jumbotron .rocket {
-		margin-top: 100px;
-	}
+  .bookcycle-jumbotron .rocket {
+    margin-top: 100px;
+  }
 
-	.bookcycle-card {
-		padding: 70px 90px 75px;
-	}
+  .bookcycle-card {
+    padding: 70px 90px 75px;
+  }
 }
 
 @media (max-width: 767px) {
-	.bookcycle-jumbotron .desk,
-	.bookcycle-jumbotron .rocket,
-	.bookcycle-jumbotron .stack {
-		margin-bottom: 50px;
-	}
+  .bookcycle-jumbotron .desk,
+  .bookcycle-jumbotron .rocket,
+  .bookcycle-jumbotron .stack {
+    margin-bottom: 50px;
+  }
 
-	.bookcycle-card {
-		padding: 15px;
-	}
+  .bookcycle-card {
+    padding: 15px;
+  }
+}
+
+.nav-link {
+  text-transform: uppercase;
 }
