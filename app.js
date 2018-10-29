@@ -42,24 +42,34 @@ app.use(
     saveUninitialized: false
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//=================================================================================//
-app.use(function(req, res, next) {
-  res.locals.currentUser = req.user;
-  next();
-});
-
+//==================================MIDDLEWARE===============================================//
+// this middleware authenticates user
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   res.redirect("/login");
 }
+
+// this middle ware returns user to every routes
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+app.use(function(err, req, res, next) {
+  if (err) {
+    res.locals.error = err.message;
+  }
+  next();
+});
 
 //===============================================GET-ROUTES==========================//
 app.get("/", (req, res) => {
@@ -104,6 +114,9 @@ app.get(
     res.status(400).send(err);
   }
 );
+app.get("/demo", (req, res) => {
+  res.send('<script>alert("Hello")</script>');
+});
 
 //show all Users collection
 app.get(
@@ -196,14 +209,16 @@ app.post(
     successRedirect: "/",
     failureRedirect: "/login"
   }),
-  (req, res) => {}
+  (req, res) => {
+    res.status(400).send('<script>alert("error")</script>');
+  }
 );
 
 app.post("/signup", (req, res) => {
   var newUser = new User({ username: req.body.username });
   User.register(newUser, req.body.password, (err, user) => {
     if (err) {
-      console.log(err);
+      res.status(400).send(err.message);
       return res.render("signup.ejs");
     }
     passport.authenticate("local")(req, res, function() {
