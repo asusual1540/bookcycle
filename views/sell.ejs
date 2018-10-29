@@ -1,29 +1,14 @@
 <% include partials/header %>
 
-    <div class="jumbotron"  style="padding:40px;">
-      <h2>Sell Your Book (User Must be Logged In)</h2>
-        <form action="/addBook" enctype="multipart/form-data" method="POST">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Book Name</label>
-            <input type="name" name="newBookname" class="form-control" id="exampleInputEmail1"  placeholder="Enter Book Name">
-          </div>
-          <div class="form-group">
-              <label for="exampleInputEmail1">Author Name</label>
-              <input type="name" name="newAuthor" class="form-control" id="exampleInputEmail1"  placeholder="Enter Book Author's Name">
-            </div>
+<% include partials/main-nav %>
 
-            <div class="inner-wrap">
-                <label><input type="file" id="photo" name="photo"/></label>
-                
-              </div>
+<section class="container">
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Price</label>
-                <input type="number" name="newPrice" class="form-control" id="exampleInputEmail1"  placeholder="Enter Price">
-              </div>
-          <button type="submit" class="btn btn-primary">Sell</button>
-      </div>
-      </form>
-    </div>
+  <div class="card bookcycle-card bg-transparent">
+    <h1 class="page-header text-center">Sell Your Book</h1>
+    <% include partials/sell-form %>
   </div>
-  <% include partials/footer %>
+
+</section>
+
+<% include partials/footer %>

@@ -11,13 +11,18 @@
 		<div class="collapse navbar-collapse" id="main-nav">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Buy</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Sell</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+				<li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
+				<li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
+				<li class="nav-item"><a class="nav-link" href="/books/all">Bookstore</a></li>
+				<li class="nav-item"><a class="nav-link" href="/users/all">AllUsers</a></li>
+				<% if (!currentUser) { %>
 				<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 				<li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
+				<% } else { %>
+				<li class="nav-item"><a class="nav-link" href="/">
+						<%= currentUser.username %></a></li>
+				<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+				<% } %>
 			</ul>
 		</div>
 	</nav>
