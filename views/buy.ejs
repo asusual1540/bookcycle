@@ -1,13 +1,27 @@
 <% include partials/header %>
 
-<% include partials/main-nav %>
+	<% include partials/main-nav %>
 
-<section class="container">
-  <h1 class="page-header text-center">Buy Books</h1>
-  <div class="card bookcycle-card bg-transparent">
-    <% include partials/buy-cards %>
-  </div>
+	<section class="container">
+		<h1 class="page-header text-center">Buy Books</h1>
+		<div class="row bookcycle-cards">
 
-</section>
+			<% docs.forEach((book) => { %>
+			<div class="col-md-3 col-sm-6">
+				<div class="card mb-5">
+					<img class="card-img-top" src="<%= book.bookImg %>" alt="<%= book.name %>">
+					<div class="card-body">
+						<h4 class="card-title mb-1"><%= book.name %></h4>
+						<p class="mb-1">by <%= book.author %></p>
+						<p>&#2547;<%= book.price %></p>
+						<button class="btn btn-primary btn-sm btn-block">Details</button>
+					</div>
+				</div>
+			</div>
+			<% }) %>
+
+			<% include partials/book %>
+		</div>
+	</section>
 
 <% include partials/footer %>
