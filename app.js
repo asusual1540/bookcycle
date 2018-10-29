@@ -108,6 +108,7 @@ app.get(
 //show all Users collection
 app.get(
   "/users/all",
+  isLoggedIn,
   (req, res) => {
     User.find().then(docs => {
       res.send({ docs });
