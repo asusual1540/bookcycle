@@ -4,7 +4,7 @@ body {
 
 .bookcycle-header {
   position: relative;
-  margin-bottom: 115px;
+  margin-bottom: 50px;
   border-bottom: 1px solid white;
 }
 
@@ -20,6 +20,9 @@ body {
   left: 50%;
   top: 0;
 }
+.row {
+  margin-top: 100px;
+}
 
 .bookcycle-jumbotron {
   color: #fff;
@@ -29,12 +32,15 @@ body {
 }
 
 .bookcycle-jumbotron img {
-  max-width: 100%;
+  max-width: 75%;
 }
 
 .bookcycle-jumbotron .tt {
   font-size: 1.4em;
   font-weight: bold;
+}
+.bookcycle-cards {
+  margin-top: 0px;
 }
 
 .page-header {
@@ -48,6 +54,8 @@ body {
   color: #fff;
   border-color: #fff;
   margin-bottom: 50px;
+  max-width: 50%;
+  margin: 0 auto;
 }
 
 .bookcycle-card ::placeholder {
@@ -67,7 +75,24 @@ body {
   border-color: #fff;
   /*	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 	        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-	text-transform: uppercase;*/
+  text-transform: uppercase;*/
+  display: inline-block;
+  padding: 10px 30px;
+  font-weight: 300;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #ae0c00;
+  border: 0px;
+  color: #fff;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.bookcycle-btn:hover {
+  background-color: #fff;
+  color: #ae0c00;
 }
 
 @media (min-width: 768px) {
@@ -102,6 +127,25 @@ body {
   }
 }
 
-.nav-link {
+.navbar-nav .nav-item .nav-link {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
   text-transform: uppercase;
+}
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: #fff;
+  color: black;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.card-title {
+  font-size: 1rem;
+}
+
+.card-body {
+  padding: 0.75rem;
 }

@@ -1,26 +1,32 @@
 <% include partials/header %>
 
-	<% include partials/main-nav %>
+<% include partials/main-nav %>
 
-	<section class="container">
-		<h1 class="page-header text-center">Buy Books</h1>
-		<div class="row bookcycle-cards">
+<section class="container">
+	<h1 class="page-header text-center">Buy Books</h1>
+	<div class="row bookcycle-cards">
 
-			<% docs.forEach((book) => { %>
-			<div class="col-lg-2 col-md-4 col-sm-6">
-				<div class="card mb-5">
-					<img class="card-img-top" src="<%= book.bookImg %>" alt="<%= book.name %>">
-					<div class="card-body">
-						<h4 class="card-title mb-1"><%= book.name %></h4>
-						<p class="mb-1">by <%= book.author %></p>
-						<p>&#2547;<%= book.price %></p>
-						<button class="btn btn-primary btn-sm btn-block">Details</button>
-					</div>
+		<% docs.forEach((book) => { %>
+		<div class="col-lg-2 col-md-4 col-sm-6">
+			<div class="card mb-5">
+				<img class="card-img-top" src="<%= book.bookImg %>" alt="<%= book.name %>">
+				<div class="card-body">
+					<h4 class="card-title mb-1">
+						<%= book.name %>
+					</h4>
+					<p class="card-title mb-1">
+						<%= book.author %>
+					</p>
+					<p class="card-title mb-1">
+						<%= book.price %> &#2547;
+					</p>
+					<button class="btn btn-primary btn-sm btn-block">Details</button>
 				</div>
 			</div>
-			<% }) %>
-
 		</div>
-	</section>
+		<% }) %>
+
+	</div>
+</section>
 
 <% include partials/footer %>
