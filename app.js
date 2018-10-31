@@ -9,7 +9,7 @@ const { ObjectID } = require("mongodb");
 const _ = require("lodash");
 const multer = require("multer");
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
+const LocalStrategy = require("passport-local").Strategy;
 //=======================================STARTING-EXPRESS-APP======================//
 const app = express();
 var port = process.env.PORT || 3000;
@@ -45,6 +45,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+
+
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -175,61 +178,91 @@ app.post(
   isLoggedIn,
   multer(multerConfig).single("photo"),
   (req, res) => {
-    var newBookname = req.body.newBookname;
-    var newAuthor = req.body.newAuthor;
-    var imageName = req.file.filename;
-    var newImage = "/photo-storage/" + imageName;
+    var newBookname = req.body.newBookname
+    var newAuthor = req.body.newAuthor
+    var newImage = "/photo-storage/" + imageName
+    var newPrice = req.body.newPrice
+    if (!newBookname) {
+      res.status(400).json({ message: 'Bookname was not given' })
+    } else if (!newAuthor) {
+      res.status(400).json({ message: 'Authorname was not given' })
+    } else if (!newPrice) {
+      res.status(400).json({ message: 'Provide a price for your book' })
+    } else if (!imageName) {
+      res.status(400).json({ message: 'Provide an image of your book' })
+    } else {
+      var imageName = req.file.filename
+      var newBook = new Book({
+        name: newBookname,
+        bookImg: newImage,
+        author: newAuthor,
+        price: newPrice
+      })
 
-    var newPrice = req.body.newPrice;
-    var newBook = new Book({
-      name: newBookname,
-      bookImg: newImage,
-      author: newAuthor,
-      price: newPrice
-    });
-    Book.create(newBook, (err, freshBook) => {
+      Book.create(newBook, (err, freshBook) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect("/buy");
+        }
+      })
+    }
+  }
+)
+
+
+app.post('/login', function (req, res, next) {
+  passport.authenticate('local', function (err, user, info) {
+    if (err) {
+      return next(err)
+    }
+    if (!user) {
+      return res.send(401, { success: false, message: 'authentication failed' })
+    }
+    req.login(user, function (err) {
       if (err) {
-        console.log(err);
-      } else {
-        res.redirect("/buy");
+        return next(err)
       }
-    });
-  }
-);
+      return res.redirect('/')
+    })
+  })(req, res, next)
+})
 
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login"
-  }),
-  (req, res) => {
-    res.status(400).send('<script>alert("error")</script>');
-  }
-);
 
 app.post("/register", (req, res) => {
-  User.findOne({ email: req.body.email })
-    .then(user => {
-      if (user) {
-        return res.status(400).json({ email: 'Email already exists' })
-      } else {
-        const newUser = new User({
-          username: req.body.username,
-          email: req.body.email
-        })
+  username = req.body.username
+  email = req.body.email
+  password = req.body.password
 
-        User.register(newUser, req.body.password, (err, user) => {
-          if (err) {
-            res.status(400).send(err.message)
-            return res.render("signup.ejs")
-          }
-          passport.authenticate("local")(req, res, function () {
-            res.redirect("/")
+  if (!username) {
+    res.status(400).json({ message: 'Username was not given' })
+  } else if (!email) {
+    res.status(400).json({ message: 'Email was not given' })
+  } else if (!password) {
+    res.status(400).json({ message: 'Password was not given' })
+  } else {
+    User.findOne({ email: req.body.email })
+      .then(user => {
+        if (user) {
+          return res.status(400).json({ email: 'Email already exists' })
+        } else {
+          const newUser = new User({
+            username: req.body.username,
+            email: req.body.email
           })
-        })
-      }
-    })
+
+          User.register(newUser, req.body.password, (err, user) => {
+            if (err) {
+              res.status(400).send(err.message)
+              return res.render("signup.ejs")
+            }
+            passport.authenticate("local")(req, res, function () {
+              res.redirect("/")
+            })
+          })
+        }
+      })
+  }
 })
 
 //=============================================USE ROUTES================================//
