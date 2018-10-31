@@ -44,9 +44,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use(new LocalStrategy(User.authenticate()));
-
-
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -209,15 +208,13 @@ app.post(
     }
   }
 )
-
-
 app.post('/login', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) {
       return next(err)
     }
     if (!user) {
-      return res.send(401, { success: false, message: 'authentication failed' })
+      return res.status(400).json({ success: false, message: 'authentication failed' })
     }
     req.login(user, function (err) {
       if (err) {
