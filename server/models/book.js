@@ -1,5 +1,4 @@
-var mongoose = require("mongoose");
-const _ = require("lodash");
+var mongoose = require("mongoose")
 
 var BookSchema = new mongoose.Schema({
   name: {
@@ -25,17 +24,17 @@ var BookSchema = new mongoose.Schema({
     default: null,
     requierd: true,
     trim: true
+  },
+  description: {
+    type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
-});
-
-BookSchema.methods.toJSON = function() {
-  var book = this;
-  var bookObject = book.toObject();
-
-  return _.pick(bookObject, ["_id", "name", "author", "bookImg", "price"]);
-};
+})
 
 var Book = mongoose.model("Book", BookSchema);
 module.exports = {
   Book
-};
+}

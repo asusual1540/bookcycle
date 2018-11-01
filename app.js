@@ -7,10 +7,10 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
 const session = require("express-session")
 
-const authRoutes = require("./routes/auth")
-const profileRoutes = require("./routes/profile")
-const bookRoutes = require("./routes/books")
-const commonRoutes = require("./routes/common")
+const authRoutes = require("./routes/authRoutes")
+const profileRoutes = require("./routes/profileRoutes")
+const bookRoutes = require("./routes/bookRoutes")
+const commonRoutes = require("./routes/commonRoutes")
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -42,7 +42,7 @@ passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.currentUser = req.user
   next()
 })

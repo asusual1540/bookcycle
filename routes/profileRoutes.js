@@ -1,7 +1,10 @@
 const express = require("express")
 const router = express.Router()
 const { User } = require("../server/models/user")
+const { Profile } = require("../server/models/profile")
 const { ObjectID } = require("mongodb")
+const mongoose = require("mongoose")
+const passport = require("passport")
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
@@ -10,6 +13,10 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login")
 }
 
+router.get("/users", passport.authenticate("local", (req, res) => {
+    res.json({ user: req.user.username })
+})
+)
 router.get(
     "/users/all",
     isLoggedIn,
