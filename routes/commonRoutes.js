@@ -6,6 +6,10 @@ router.get("/signup", (req, res) => {
     res.render("signup.ejs", {})
 })
 
+router.get("/privacy-policy", (req, res) => {
+    res.render("privacy-policy.ejs", {})
+})
+
 // Show all books collections
 router.get(
     "/books/all",

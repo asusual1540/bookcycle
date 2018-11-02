@@ -13,10 +13,6 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login")
 }
 
-router.get("/users", passport.authenticate("local", (req, res) => {
-    res.json({ user: req.user.username })
-})
-)
 router.get(
     "/users/all",
     isLoggedIn,
