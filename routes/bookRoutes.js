@@ -13,12 +13,12 @@ function isLoggedIn(req, res, next) {
 
 router.post(
     "/sell",
-    isLoggedIn,
+    // isLoggedIn,
     multer(multerConfig).single("photo"),
     (req, res) => {
         var newBookname = req.body.newBookname
         var newAuthor = req.body.newAuthor
-        var newImage = "/photo-storage/" + imageName
+        var newImage = "./public/photo-storage/" + imageName
         var newPrice = req.body.newPrice
         if (!newBookname) {
             res.status(400).json({ message: 'Bookname was not given' })
@@ -26,7 +26,7 @@ router.post(
             res.status(400).json({ message: 'Authorname was not given' })
         } else if (!newPrice) {
             res.status(400).json({ message: 'Provide a price for your book' })
-        } else if (!imageName) {
+        } else if (!newImage) {
             res.status(400).json({ message: 'Provide an image of your book' })
         } else {
             var imageName = req.file.filename
