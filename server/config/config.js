@@ -4,6 +4,7 @@ module.exports = {
     "fb": {
         "clientID": "2113469788922621",
         "clientSecret": "b0481c6222414679e87988a85193f843",
-        "callbackURL": "//localhost:3000/auth/facebook/callback"
+        "callbackURL": "//localhost:3000/auth/facebook/callback",
+        "profileFields": ["id", "displayName", "photos"]
     }
 }

@@ -1,12 +1,13 @@
-const mongoose = require("mongoose")
+const Mongoose = require("mongoose")
 const config = require("../config/config")
 
-mongoose.Promise = global.Promise;
-mongoose.connect(
+Mongoose.Promise = global.Promise;
+Mongoose.connect(
   config.mongoURI,
   { useNewUrlParser: true }
 )
 
+
 module.exports = {
-  mongoose
+  Mongoose
 }

@@ -25,5 +25,4 @@ const storage = new GridFsStorage({
 // })
 const upload = multer({ storage }).single("photo")
 
-module.exports =
-  upload
+module.exports = upload

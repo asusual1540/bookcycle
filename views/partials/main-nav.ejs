@@ -21,7 +21,8 @@
 					<% } else { %>
 					<!-- <li class="nav-item"><a class="nav-link" href="/users/all">Userlist</a></li> -->
 					<li class="nav-item"><a class="nav-link" href="/">
-							<%= currentUser.username %></a></li>
+							<%= currentUser.fullName || currentUser.username %></a></li>
+					<li><img src="<%= currentUser.profilePic %>" alt="<%= currentUser.fullName %>"></li>
 					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 					<% } %>
 				</ul>

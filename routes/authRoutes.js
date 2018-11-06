@@ -39,7 +39,8 @@ router.post("/register", (req, res) => {
                 } else {
                     const newUser = new User({
                         username: req.body.username,
-                        email: req.body.email
+                        email: req.body.email,
+                        profilePic: ""
                     })
 
                     User.register(newUser, req.body.password, (err, user) => {
@@ -58,13 +59,23 @@ router.post("/register", (req, res) => {
 
 
 router.get("/login", (req, res) => {
-    res.render("login.ejs", {});
-});
+    res.render("login.ejs", {})
+})
 
 
 router.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
-});
+    req.logout()
+    res.redirect("/")
+})
+
+router.get("/auth/facebook", passport.authenticate("facebook"), (req, res) => {
+
+})
+router.get("/auth/facebook/callback", passport.authenticate("facebook", {
+    successRedirect: "/sell",
+    failureRedirect: "/login"
+}), (req, res) => {
+
+})
 
 module.exports = router

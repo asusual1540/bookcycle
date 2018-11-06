@@ -10,6 +10,7 @@ var UserSchema = new mongoose.Schema({
         trim: true,
         minlength: 1
     },
+
     email: {
         type: String,
         requierd: true,
@@ -19,6 +20,9 @@ var UserSchema = new mongoose.Schema({
         type: String,
         minlength: 4
     },
+    profilePic: {
+        type: Buffer,
+    },
     date: {
         type: Date,
         default: Date.now
@@ -27,7 +31,10 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(passportLocalMongoose)
 
-var User = mongoose.model('User', UserSchema)
+const User = mongoose.models.User || mongoose.model('User', UserSchema)
+
+// export const User = mongoose.models.User || mongoose.model('User', UserSchema)
+
 module.exports = {
     User
 }

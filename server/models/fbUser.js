@@ -9,7 +9,7 @@ var fbUserSchema = new mongoose.Schema({
     profilePic: String
 })
 
-UserSchema.plugin(passportLocalMongoose)
+// fbUserSchema.plugin(passportLocalMongoose)
 
 var fbUser = mongoose.model('fbUser', fbUserSchema)
 module.exports = {

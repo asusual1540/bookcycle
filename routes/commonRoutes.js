@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const { Book } = require("../server/models/book")
 
+
 router.get("/signup", (req, res) => {
     res.render("signup.ejs", {})
 })
@@ -26,5 +27,6 @@ router.get(
 router.get("/", (req, res) => {
     res.render("index.ejs", {})
 })
+
 
 module.exports = router

@@ -81,7 +81,9 @@ router.get(
 )
 
 router.get("/sell", (req, res) => {
-    res.render("sell.ejs", {})
+    res.render("sell.ejs", {
+        user: req.user
+    })
 })
 
 module.exports = router
