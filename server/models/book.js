@@ -8,10 +8,8 @@ var BookSchema = new mongoose.Schema({
     trim: true
   },
   bookImg: {
-    type: String,
-    required: true,
-    minlength: 1,
-    trim: true
+    data: Buffer,
+    contentType: String
   },
   author: {
     type: String,

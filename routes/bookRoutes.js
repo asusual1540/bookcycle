@@ -1,8 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const { Book } = require("../server/models/book")
-const multer = require("multer")
-const { multerConfig } = require("../server/middleware/multer")
+const upload = require("../server/middleware/multer")
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
@@ -14,12 +13,12 @@ function isLoggedIn(req, res, next) {
 router.post(
     "/sell",
     // isLoggedIn,
-    multer(multerConfig).single("photo"),
+    upload,
     (req, res) => {
         var newBookname = req.body.newBookname
         var newAuthor = req.body.newAuthor
-        var newImage = "./public/photo-storage/" + imageName
         var newPrice = req.body.newPrice
+        var newImage = req.file.filename
         if (!newBookname) {
             res.status(400).json({ message: 'Bookname was not given' })
         } else if (!newAuthor) {
@@ -29,7 +28,6 @@ router.post(
         } else if (!newImage) {
             res.status(400).json({ message: 'Provide an image of your book' })
         } else {
-            var imageName = req.file.filename
             var newBook = new Book({
                 name: newBookname,
                 bookImg: newImage,
