@@ -10,41 +10,42 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login")
 }
 
-router.post(
-    "/sell",
-    // isLoggedIn,
-    upload,
-    (req, res) => {
-        var newBookname = req.body.newBookname
-        var newAuthor = req.body.newAuthor
-        var newPrice = req.body.newPrice
-        var newImage = req.file.filename
-        if (!newBookname) {
-            res.status(400).json({ message: 'Bookname was not given' })
-        } else if (!newAuthor) {
-            res.status(400).json({ message: 'Authorname was not given' })
-        } else if (!newPrice) {
-            res.status(400).json({ message: 'Provide a price for your book' })
-        } else if (!newImage) {
-            res.status(400).json({ message: 'Provide an image of your book' })
-        } else {
-            var newBook = new Book({
-                name: newBookname,
-                bookImg: newImage,
-                author: newAuthor,
-                price: newPrice
-            })
+// router.post(
+//     "/sell",
+//     // isLoggedIn,
+//     upload,
+//     (req, res) => {
+//         var newBookname = req.body.newBookname
+//         var newAuthor = req.body.newAuthor
+//         var newPrice = req.body.newPrice
+//         var newImage = req.file.filename
+//         console.log(req.file)
+//         if (!newBookname) {
+//             res.status(400).json({ message: 'Bookname was not given' })
+//         } else if (!newAuthor) {
+//             res.status(400).json({ message: 'Authorname was not given' })
+//         } else if (!newPrice) {
+//             res.status(400).json({ message: 'Provide a price for your book' })
+//         } else if (!newImage) {
+//             res.status(400).json({ message: 'Provide an image of your book' })
+//         } else {
+//             var newBook = new Book({
+//                 name: newBookname,
+//                 bookImg: newImage,
+//                 author: newAuthor,
+//                 price: newPrice
+//             })
 
-            Book.create(newBook, (err, freshBook) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.redirect("/buy");
-                }
-            })
-        }
-    }
-)
+//             Book.create(newBook, (err, freshBook) => {
+//                 if (err) {
+//                     console.log(err);
+//                 } else {
+//                     res.redirect("/buy");
+//                 }
+//             })
+//         }
+//     }
+// )
 
 //show single book by attributes like here is id
 router.get("/books/:id", (req, res) => {
@@ -64,7 +65,6 @@ router.get("/books/:id", (req, res) => {
         }
     )
 })
-
 
 router.get(
     "/buy",

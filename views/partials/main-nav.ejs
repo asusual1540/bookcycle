@@ -19,11 +19,10 @@
 					<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 					<li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
 					<% } else { %>
-					<!-- <li class="nav-item"><a class="nav-link" href="/users/all">Userlist</a></li> -->
-					<li class="nav-item"><a class="nav-link" href="/">
-							<%= currentUser.fullName || currentUser.username %></a></li>
-					<li><img src="<%= currentUser.profilePic %>" alt="<%= currentUser.fullName %>"></li>
 					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">
+							<%= currentUser.local.name || currentUser.facebook.name || currentUser.google.name  %></a></li>
+					<li><img src="<%= currentUser.facebook.profilePic || currentUser.google.profilePic %>" alt="<%= currentUser.facebook.name || currentUser.google.displayName %>"></li>
 					<% } %>
 				</ul>
 			</div>

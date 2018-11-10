@@ -1,39 +1,40 @@
 const mongoose = require('mongoose')
-const passportLocalMongoose = require('passport-local-mongoose')
+var bcrypt = require('bcryptjs');
 
-
-// a well defined schema for user
 var UserSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        requierd: true,
-        trim: true,
-        minlength: 1
+    local: {
+        email: String,
+        password: String,
+        name: String
     },
-
-    email: {
-        type: String,
-        requierd: true,
-        trim: true
+    facebook: {
+        id: String,
+        token: String,
+        name: String,
+        email: String,
+        profilePic: String
     },
-    password: {
-        type: String,
-        minlength: 4
-    },
-    profilePic: {
-        type: Buffer,
-    },
-    date: {
-        type: Date,
-        default: Date.now
+    google: {
+        id: String,
+        token: String,
+        email: String,
+        name: String,
+        profilePic: String
     }
 })
 
-UserSchema.plugin(passportLocalMongoose)
+// generating a hash
+UserSchema.methods.generateHash = function (password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-const User = mongoose.models.User || mongoose.model('User', UserSchema)
+// checking if password is valid
+UserSchema.methods.validPassword = function (password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
 
-// export const User = mongoose.models.User || mongoose.model('User', UserSchema)
+
+const User = mongoose.model('User', UserSchema)
 
 module.exports = {
     User
