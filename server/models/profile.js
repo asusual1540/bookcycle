@@ -11,6 +11,10 @@ const ProfileSchema = new Schema({
         required: true,
         max: 40
     },
+    fullName: {
+        type: String,
+        required: true
+    },
     status: {
         type: String,
     },
