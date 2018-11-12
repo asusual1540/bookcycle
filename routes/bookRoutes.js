@@ -3,14 +3,12 @@ const router = express.Router()
 const { Book } = require("../server/models/book")
 const upload = require("../server/middleware/multer")
 const cloudinary = require('cloudinary')
-require('dotenv').config()
 
 cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
+    cloud_name: 'bookcycle',
+    api_key: '899686255551365',
+    api_secret: 'e_c1gq9QHSO3IknVfQXJaYsZ1ok'
 })
-
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
@@ -62,8 +60,6 @@ router.post(
         }
     }
 )
-
-
 
 //show single book by attributes like here is id
 router.get("/books/:id", (req, res) => {
