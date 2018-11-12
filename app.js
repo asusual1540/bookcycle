@@ -1,7 +1,7 @@
 console.log("app started...")
 const express = require("express")
 const app = express()
-const port = process.env.PORT || 3000
+const port = 3000
 const ejs = require("ejs")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
@@ -10,7 +10,12 @@ const Mongoose = require("mongoose")
 const session = require('express-session')
 const flash = require('connect-flash')
 
+
 const config = require("./server/config/config")
+
+
+const upload = require("./server/middleware/multer")
+
 
 Mongoose.Promise = global.Promise
 Mongoose.connect(

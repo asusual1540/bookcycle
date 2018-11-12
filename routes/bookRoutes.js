@@ -2,6 +2,15 @@ const express = require("express")
 const router = express.Router()
 const { Book } = require("../server/models/book")
 const upload = require("../server/middleware/multer")
+const cloudinary = require('cloudinary')
+require('dotenv').config()
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+})
+
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
@@ -18,7 +27,7 @@ router.post(
         var newBookname = req.body.newBookname
         var newAuthor = req.body.newAuthor
         var newPrice = req.body.newPrice
-        var newImage = "photo-storage/" + req.file.filename
+        var newImage = req.file.path
         console.log(req.file)
         if (!newBookname) {
             res.status(400).json({ message: 'Bookname was not given' })
@@ -29,24 +38,32 @@ router.post(
         } else if (!newImage) {
             res.status(400).json({ message: 'Provide an image of your book' })
         } else {
-            var newBook = new Book({
-                user: req.user.id,
-                name: newBookname,
-                bookImg: newImage,
-                author: newAuthor,
-                price: newPrice
-            })
+            cloudinary.v2.uploader.upload(newImage,
+                (err, result) => {
+                    if (err) {
+                        res.status(400).json({ error: err })
+                    }
+                    var newBook = new Book({
+                        user: req.user.id,
+                        name: newBookname,
+                        bookImg: result.url,
+                        author: newAuthor,
+                        price: newPrice
+                    })
 
-            Book.create(newBook, (err, freshBook) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.redirect("/buy");
-                }
-            })
+                    Book.create(newBook, (err, freshBook) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.redirect("/buy");
+                        }
+                    })
+                })
         }
     }
 )
+
+
 
 //show single book by attributes like here is id
 router.get("/books/:id", (req, res) => {
@@ -88,3 +105,5 @@ router.get("/sell", (req, res) => {
 })
 
 module.exports = router
+
+
