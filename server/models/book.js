@@ -1,6 +1,11 @@
 var mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 var BookSchema = new mongoose.Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  },
   name: {
     type: String,
     required: true,
@@ -8,8 +13,8 @@ var BookSchema = new mongoose.Schema({
     trim: true
   },
   bookImg: {
-    data: Buffer,
-    contentType: String
+    type: String,
+    required: true
   },
   author: {
     type: String,

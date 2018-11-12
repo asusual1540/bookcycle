@@ -12,6 +12,7 @@ const flash = require('connect-flash')
 
 const config = require("./server/config/config")
 
+Mongoose.Promise = global.Promise
 Mongoose.connect(
   config.mongoURI,
   { useNewUrlParser: true }

@@ -1,24 +1,35 @@
-// const GridFsStorage = require('multer-gridfs-storage')
-// const multer = require("multer")
-// const config = require("../config/config")
-// const mongoose = require("mongoose")
+const multer = require('multer')
+const path = require('path')
+
+/** Storage Engine */
+const storageEngine = multer.diskStorage({
+    destination: './public/photo-storage',
+    filename: function (req, file, fn) {
+        fn(null, new Date().getTime().toString() + '-' + file.fieldname + path.extname(file.originalname))
+    }
+})
+
+//init
+
+const upload = multer({
+    storage: storageEngine,
+    limits: { fileSize: 200000 },
+    fileFilter: function (req, file, callback) {
+        validateFile(file, callback)
+    }
+}).single('photo')
 
 
-// const connection = mongoose.connect(config.mongoURI, { useNewUrlParser: true })
+var validateFile = function (file, cb) {
+    allowedFileTypes = /jpeg|jpg|png|gif/
+    const extension = allowedFileTypes.test(path.extname(file.originalname).toLowerCase())
+    const mimeType = allowedFileTypes.test(file.mimetype)
+    if (extension && mimeType) {
+        return cb(null, true)
+    } else {
+        cb("Invalid file type. Only JPEG, PNG and GIF file are allowed.")
+    }
+}
 
-// const storage = new GridFsStorage({
-//   db: connection,
-//   file: (req, file) => {
-//     if (file.mimetype === 'image/jpeg') {
-//       return {
-//         bucketName: "photos"
-//       }
-//     } else {
-//       return null
-//     }
-//   }
-// })
 
-// const upload = multer({ storage }).single("photo")
-
-// module.exports = upload
+module.exports = upload
