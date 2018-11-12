@@ -4,7 +4,7 @@ module.exports = {
     'facebookAuth': {
         'clientID': '2113469788922621', // your App ID
         'clientSecret': 'b0481c6222414679e87988a85193f843', // your App Secret
-        'callbackURL': '/auth/facebook/callback',
+        'callbackURL': 'https://whispering-journey-87803.auth0.com/auth/facebook/callback',
         'profileURL': 'https://graph.facebook.com/v2.5/me?fields=first_name,last_name,email',
         'profileFields': ['id', 'email', 'name', 'photos'] // For requesting permissions from Facebook API
     },
