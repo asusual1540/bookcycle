@@ -9,13 +9,9 @@ const passport = require("passport")
 const Mongoose = require("mongoose")
 const session = require('express-session')
 const flash = require('connect-flash')
-
+const MongoStore = require('connect-mongo')(session)
 
 const config = require("./server/config/config")
-
-
-const upload = require("./server/middleware/multer")
-
 
 Mongoose.Promise = global.Promise
 Mongoose.connect(
@@ -42,7 +38,8 @@ app.set("view engine", ejs)
 app.use(session({
   secret: 'Iamkira1540',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: Mongoose.connection })
 }))
 
 app.use(passport.initialize())
