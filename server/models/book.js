@@ -28,9 +28,49 @@ var BookSchema = new mongoose.Schema({
     requierd: true,
     trim: true
   },
-  description: {
-    type: String
-  },
+  reviews: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
+      text: {
+        type: String,
+        required: true
+      },
+      likes: [
+        {
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+          }
+        }
+      ],
+      comments: [
+        {
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+          },
+          text: {
+            type: String
+          },
+          date: {
+            type: Date,
+            default: Date.now
+          }
+        }
+      ]
+    }
+  ],
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      }
+    }
+  ],
   date: {
     type: Date,
     default: Date.now

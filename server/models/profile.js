@@ -19,26 +19,35 @@ const ProfileSchema = new Schema({
         type: String,
     },
     favouriteAuthors: {
-        type: [String]
+        type: [String],
+        required: true,
+        min: 1
     },
     favouriteBooks: {
-        type: [String]
+        type: [String],
+        required: true,
+        min: 1
     },
     favouriteQuotes: {
-        type: [String]
+        type: [String],
+        max: 5
     },
     ownedBooks: {
         type: [Schema.Types.ObjectId],
         ref: "Book"
     },
+    readBooks: {
+        type: [Schema.Types.ObjectId],
+        ref: "Book"
+    },
     location: {
-        type: [String]
+        type: String
     },
     social: {
         facebook: {
             type: String
         },
-        instagram: {
+        google: {
             type: String
         }
     },
