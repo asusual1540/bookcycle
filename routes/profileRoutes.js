@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const { User } = require("../server/models/user")
 const { Profile } = require("../server/models/profile")
+const { Book } = require("../server/models/book")
 const { ObjectID } = require("mongodb")
 const mongoose = require("mongoose")
 const passport = require("passport")
@@ -114,5 +115,13 @@ router.get("/users/:id", (req, res) => {
         }
     )
 })
+
+router.get("/profile", (req, res) => {
+    Book.find().then(docs => {
+        res.render("view-profile.ejs", {
+            docs: docs
+        })
+    })
+});
 
 module.exports = router
