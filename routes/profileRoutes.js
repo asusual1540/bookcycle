@@ -38,7 +38,6 @@ router.post(
         if (req.body.handle) profileFields.handle = req.body.handle
         if (req.body.fullName) profileFields.fullName = req.body.fullName
         if (req.body.status) profileFields.status = req.body.status
-        if (req.body.location) profileFields.location = req.body.location
 
         if (typeof req.body.favouriteAuthors !== 'undefined') {
             profileFields.favouriteAuthors = req.body.favouriteAuthors.split(',')
@@ -55,6 +54,8 @@ router.post(
         if (typeof req.body.readBooks !== 'undefined') {
             profileFields.readBooks = req.body.readBooks.split(',')
         }
+        if (req.body.location) profileFields.location = req.body.location
+
         profileFields.social = {}
         if (req.body.facebook) profileFields.social.facebook = req.body.facebook
         if (req.body.google) profileFields.social.google = req.body.google

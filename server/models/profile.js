@@ -28,15 +28,7 @@ const ProfileSchema = new Schema({
         required: true,
         min: 1
     },
-    favouriteQuotes: {
-        type: [String],
-        max: 5
-    },
     ownedBooks: {
-        type: [Schema.Types.ObjectId],
-        ref: "Book"
-    },
-    readBooks: {
         type: [Schema.Types.ObjectId],
         ref: "Book"
     },
