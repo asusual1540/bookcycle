@@ -1,0 +1,64 @@
+<% include partials/header %>
+
+<% include partials/main-nav %>
+
+<section class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="sidebar">
+				<section class="widget user-info">
+					<h3 class="widget-title">Balance: 500TK</h3>
+					<div class="widget-content">
+            <img class="img-fluid" src="/images/default-girl-gravatar.png" alt="Sharika Hasan">
+            <h1 class="user-name text-uppercase mt-4">Sharika Hasan</h1>
+            <br>
+            <p>Age: 24</p>
+            <p>Book for sale: 12</p>
+            <p>Book sold: 123</p>
+            <br>
+            <p>Member Since: 23th July 2018</p>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<div class="col-sm-9 bookcycle-cards">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb bg-transparent p-0">
+					<li class="breadcrumb-item"><a href="#">Author</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Humayun Ahmed</li>
+				</ol>
+			</nav>
+
+			<div class="row">
+				<% docs.forEach((book) => { %>
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<div class="book-loop mb-4">
+						<div class="row">
+							<div class="col-sm-6">
+								<img class="bookcycle-card-img" src="<%= book.bookImg %>" alt="<%= book.name %>">
+							</div>
+							<div class="col-sm-6">
+								<div class="bookcycle-card-body">
+									<h4 class="bookcycle-card-title mb-1">
+										<%= book.name %>
+									</h4>
+									<p class="bookcycle-card-title mb-1">
+										<%= book.author %>
+									</p>
+									<p class="bookcycle-card-title mb-1">
+										<%= book.price %> &#2547;
+									</p>
+									<button class="btn btn-primary btn-sm btn-block">Details</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<% }) %>
+			</div>
+		</div>
+	</div>
+</section>
+
+<% include partials/footer %>
