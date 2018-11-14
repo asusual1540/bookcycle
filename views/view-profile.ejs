@@ -7,16 +7,19 @@
 		<div class="col-sm-3">
 			<div class="sidebar">
 				<section class="widget user-info">
-					<h3 class="widget-title">Balance: 500TK</h3>
+					<h3 class="widget-title">Balance: 0TK</h3>
 					<div class="widget-content">
-            <img class="img-fluid" src="/images/default-girl-gravatar.png" alt="Sharika Hasan">
-            <h1 class="user-name text-uppercase mt-4">Sharika Hasan</h1>
-            <br>
-            <p>Age: 24</p>
-            <p>Book for sale: 12</p>
-            <p>Book sold: 123</p>
-            <br>
-            <p>Member Since: 23th July 2018</p>
+						<% if (!currentUser) { %>
+						<img class="img-fluid" src="/images/default-girl-gravatar.png" alt="Sharika Hasan">
+						<% } else { %>
+						<img class="img-fluid" src="<%= currentUser.facebook.profilePic || currentUser.google.profilePic %>">
+						<h1 class="user-name text-uppercase mt-4">
+							<%= currentUser.local.name || currentUser.facebook.name || currentUser.google.name  %>
+						</h1>
+						<% } %>
+						<div class="form-group">
+							<button type="submit" class="btn bookcycle-btn">Edit Profile</button>
+						</div>
 					</div>
 				</section>
 			</div>

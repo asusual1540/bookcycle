@@ -6,7 +6,7 @@ module.exports = {
         'clientSecret': 'b0481c6222414679e87988a85193f843', // your App Secret
         'callbackURL': '/auth/facebook/callback',
         'profileURL': 'https://graph.facebook.com/v2.5/me?fields=first_name,last_name,email',
-        'profileFields': ['id', 'email', 'name', 'photos'] // For requesting permissions from Facebook API
+        'profileFields': ['id', 'email', 'name', 'picture.type(large)'] // For requesting permissions from Facebook API
     },
     'googleAuth': {
         'clientID': '173867288656-dhohd4plhrr4tu8ne79mb9fqmj3ejsiq.apps.googleusercontent.com',
