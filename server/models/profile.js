@@ -6,12 +6,11 @@ const ProfileSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    handle: {
-        type: String,
-        required: true,
-        max: 40
-    },
     fullName: {
+        type: String,
+        required: true
+    },
+    gender: {
         type: String,
         required: true
     },
@@ -20,28 +19,21 @@ const ProfileSchema = new Schema({
     },
     favouriteAuthors: {
         type: [String],
-        required: true,
         min: 1
     },
     favouriteBooks: {
         type: [String],
-        required: true,
         min: 1
+    },
+    profilePic: {
+        type: String,
     },
     ownedBooks: {
         type: [Schema.Types.ObjectId],
         ref: "Book"
     },
     location: {
-        type: String
-    },
-    social: {
-        facebook: {
-            type: String
-        },
-        google: {
-            type: String
-        }
+        type: String,
     },
     date: {
         type: Date,

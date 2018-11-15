@@ -4,56 +4,72 @@
 
 <section class="container">
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-3 category">
 			<div class="sidebar">
 				<section class="widget book-category">
 					<h3 class="widget-title">Categories</h3>
 					<div class="widget-content">
 						<ul class="list-unstyled">
 							<li>
+								<% if (!author) { %>
+								<a href="#">No categories</a>
+								<% } else { %>
 								<a href="#">Author</a>
-								<ul class="list-unstyled children">
-									<li><a href="#">Humayun Ahmed</a></li>
-									<li><a href="#">Rakib Ahmed</a></li>
-									<li><a href="#">Mukhopaddhay</a></li>
+								<%} %>
+								<ul class="list-unstyled children cat">
+									<% author.forEach((AuthorName)=>{ %>
+									<li><a href="#">
+											<%= AuthorName.name %></a></li>
+									<% }) %>
 								</ul>
 							</li>
-							<li><a href="#">BSC</a></li>
-							<li><a href="#">Novel</a></li>
 						</ul>
 					</div>
 				</section>
 			</div>
 		</div>
-
 		<div class="col-sm-9 bookcycle-cards">
-			<nav aria-label="breadcrumb">
+			<!-- <nav aria-label="breadcrumb">
 				<ol class="breadcrumb bg-transparent p-0">
+					<% if (!author) { %>
+					<li class="breadcrumb-item"><a href="#">No Categories</a></li>
+					<% } else{ %>
 					<li class="breadcrumb-item"><a href="#">Author</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Humayun Ahmed</li>
+					<% } %>
+
+
 				</ol>
-			</nav>
+			</nav> -->
 
 			<div class="row">
 				<% docs.forEach((book) => { %>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="book-loop mb-4">
+				<div class="col-lg-4 col-md-4 col-sm-6 crd">
+					<div class="book-loop mb-4 crd2">
 						<div class="row">
 							<div class="col-sm-6">
 								<img class="bookcycle-card-img" src="<%= book.bookImg %>" alt="<%= book.name %>">
 							</div>
 							<div class="col-sm-6">
-								<div class="bookcycle-card-body">
-									<h4 class="bookcycle-card-title mb-1">
-										<%= book.name %>
-									</h4>
-									<p class="bookcycle-card-title mb-1">
-										<%= book.author %>
-									</p>
-									<p class="bookcycle-card-title mb-1">
-										<%= book.price %> &#2547;
-									</p>
-									<button class="btn btn-primary btn-sm btn-block">Details</button>
+								<div class="bookcycle-card buy">
+									<div class="bookcycle-card-header">
+										<h4 class="bookcycle-card-title mb-1">
+											<%= book.name %>
+										</h4>
+									</div>
+									<div class="bookcycle-card-body">
+										<p class="bookcycle-card-author mb-1">
+											<%= book.author %>
+										</p>
+										<p class="bookcycle-card-price mb-1">
+											<%= book.price %> &#2547 by
+										</p>
+										<p class="bookcycle-card-price mb-1">
+											<%= book.ownerName %>
+										</p>
+									</div>
+									<div class="bookcycle-card-footer">
+										<button class="btn btn-outline-light btn-sm btn-block">Buy</button>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -100,13 +100,13 @@
 <g id="cycle_x5F_left">
 	
 		<circle fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" stroke-dasharray="11" cx="201.875" cy="50.667" r="24.828">
-			<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 201.875 50.667" to="360 201.875 50.667" dur="3s" repeatCount="indefinite"/>
+			<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 201.875 50.667" to="360 201.875 50.667" dur="15s" repeatCount="indefinite"/>
 		</circle>
 </g>
 <g id="cycle_x5F_right">
 	
 		<circle fill="none" stroke="#FFFFFF" stroke-width="5" stroke-miterlimit="10" stroke-dasharray="11" cx="263.501" cy="50.667" r="24.829">
-			<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 263.501 50.67" to="360 263.501 50.667" dur="4s" repeatCount="indefinite"/>
+			<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 263.501 50.67" to="360 263.501 50.667" dur="20s" repeatCount="indefinite"/>
 		</circle>
 
 </g>

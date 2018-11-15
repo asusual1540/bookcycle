@@ -73,9 +73,8 @@ body {
   background-color: #ae0c00;
   color: #fff;
   border-color: #fff;
-  /*	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 	        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
-  text-transform: uppercase;*/
   display: inline-block;
   padding: 10px 30px;
   font-weight: 300;
@@ -83,16 +82,17 @@ body {
   border-radius: 10px;
   background-color: #ae0c00;
   border: 0px;
-  color: #fff;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
 }
 
 .bookcycle-btn:hover {
   background-color: #fff;
-  color: #ae0c00;
+  color: black;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 
 @media (min-width: 768px) {
@@ -111,7 +111,7 @@ body {
   }
 
   .bookcycle-card {
-    padding: 70px 90px 75px;
+    padding: 50px 50px 50px;
   }
 }
 
@@ -123,10 +123,13 @@ body {
   }
 
   .bookcycle-card {
-    padding: 15px;
+    padding: 50px 50px 50px;
   }
 }
-
+.crd {
+  padding-right: 3px;
+  padding-left: 3px;
+}
 .navbar-nav .nav-item .nav-link {
   color: #fff;
   text-decoration: none;
@@ -158,10 +161,10 @@ body {
 }
 
 .book-loop {
-  background-color: #971516;
+  background-color: rgba(139,0,0,.75);
   color: #fff;
   padding: 10px;
-  border: 1px solid;
+  border: .5px solid;
 }
 
 .book-loop .bookcycle-card-img {
@@ -171,10 +174,29 @@ body {
 
 .book-loop .bookcycle-card-title {
   font-size: 1rem;
+  text-transform: uppercase;
+}
+.book-loop .bookcycle-card-author {
+  font-size: .75rem;
+  text-transform: capitalize;
+}
+.book-loop .bookcycle-card-price {
+  font-size: .75rem;
 }
 
 .book-loop .bookcycle-card-body {
-  padding: 0.75rem;
+  padding: 0rem;
+}
+.bookcycle-card-footer {
+  position : absolute;
+  bottom : 0;
+  width : 90%;
+}
+.bookcycle-card-header {
+  position : absolute;
+  top : 0;
+  width : 90%;
+  height : 20%;
 }
 
 @media (min-width: 768px) {
@@ -191,3 +213,45 @@ body {
 .user-info .user-name {
   font-size: 24px;
 }
+
+.category {
+  background-color: rgba(139,0,0,.75);
+  padding-top : 15px;
+}
+
+/* .sellbox{
+  width: 50%;
+} */
+
+
+.btn-group{
+  position: absolute;
+  float: right;
+}
+
+.buy {
+  padding: 50px 0px 0px;
+}
+
+.widget-title {
+  color : #fff;
+}
+
+.favBook{
+  margin : 0px 0px;
+  padding : 0px 0px;
+
+}
+.favBooks{
+  font-size: 1rem;
+  border-bottom : 1px solid #fff;
+}
+.fullname{
+  margin-top : 5px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+.form-check {
+  margin-top: 10px;
+}
+

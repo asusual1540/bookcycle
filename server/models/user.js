@@ -20,6 +20,10 @@ var UserSchema = new mongoose.Schema({
         email: String,
         name: String,
         profilePic: String
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 

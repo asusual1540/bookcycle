@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const { Book } = require("../server/models/book")
+const { Author } = require("../server/models/author")
 const upload = require("../server/middleware/multer")
 const cloudinary = require('cloudinary')
 
@@ -26,6 +27,7 @@ router.post(
         var newAuthor = req.body.newAuthor
         var newPrice = req.body.newPrice
         var newImage = req.file.path
+        var newCategory = req.body.category
         console.log(req.file)
         if (!newBookname) {
             res.status(400).json({ message: 'Bookname was not given' })
@@ -35,20 +37,48 @@ router.post(
             res.status(400).json({ message: 'Provide a price for your book' })
         } else if (!newImage) {
             res.status(400).json({ message: 'Provide an image of your book' })
+        } else if (!newCategory) {
+            res.status(400).json({ message: 'Provide an Category of your book' })
         } else {
-            cloudinary.v2.uploader.upload(newImage,
+            cloudinary.v2.uploader.upload(newImage, {
+                width: 200,
+                height: 332,
+                crop: "fill"
+            },
                 (err, result) => {
                     if (err) {
                         res.status(400).json({ error: err })
                     }
+                    var uniqueAuthor = new Author({
+                        name: newAuthor.toLowerCase()
+                    })
+
+                    Author.findOne({ name: newAuthor.toLowerCase() })
+                        .then(author => {
+                            if (author) {
+                                return console.log("Author by that name alrady exists in Database")
+                            }
+                            Author.create(uniqueAuthor, (err, result) => {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log(result);
+                                }
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                    var username = req.user.local.name || req.user.facebook.name || req.user.google.name
                     var newBook = new Book({
                         user: req.user.id,
+                        ownerName: username,
                         name: newBookname,
                         bookImg: result.url,
                         author: newAuthor,
-                        price: newPrice
+                        price: newPrice,
+                        category: newCategory
                     })
-
                     Book.create(newBook, (err, freshBook) => {
                         if (err) {
                             console.log(err);
@@ -84,8 +114,11 @@ router.get(
     "/buy",
     (req, res) => {
         Book.find().then(docs => {
-            res.render("buy.ejs", {
-                docs: docs
+            Author.find().then(author => {
+                res.render("buy.ejs", {
+                    docs: docs,
+                    author: author
+                })
             })
         })
     },

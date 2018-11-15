@@ -6,6 +6,12 @@ var BookSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
+  ownerName: {
+    type: String,
+    required: true,
+    minlength: 1,
+    trim: true
+  },
   name: {
     type: String,
     required: true,
@@ -28,41 +34,10 @@ var BookSchema = new mongoose.Schema({
     requierd: true,
     trim: true
   },
-  reviews: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-      },
-      text: {
-        type: String,
-        required: true
-      },
-      likes: [
-        {
-          user: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-          }
-        }
-      ],
-      comments: [
-        {
-          user: {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-          },
-          text: {
-            type: String
-          },
-          date: {
-            type: Date,
-            default: Date.now
-          }
-        }
-      ]
-    }
-  ],
+  category: {
+    type: String,
+    required: true
+  },
   likes: [
     {
       user: {

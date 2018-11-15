@@ -9,16 +9,42 @@
 				<section class="widget user-info">
 					<h3 class="widget-title">Balance: 0TK</h3>
 					<div class="widget-content">
-						<% if (!currentUser) { %>
-						<img class="img-fluid" src="/images/default-girl-gravatar.png" alt="Sharika Hasan">
+						<% if (profile.profilePic) { %>
+						<img class="img-fluid" src="<%= profile.profilePic %>" alt="">
+						<h1 class="fullname">
+							<%= profile.fullName %>
+						</h1>
+						<h6 class="">
+							<%= profile.status %>
+						</h6>
+						<div>
+							<h2 class="favBooks">
+								Favourite Books
+							</h2>
+							<% profile.favouriteBooks.forEach(book => { %>
+							<p class="favBook">
+								<%= book %>
+							</p>
+							<% }) %>
+						</div>
+						<div>
+							<h2 class="favBooks">
+								Favourite Authors
+							</h2>
+							<% profile.favouriteAuthors.forEach(author => { %>
+							<p class="favBook">
+								<%= author %>
+							</p>
+							<% }) %>
+						</div>
 						<% } else { %>
 						<img class="img-fluid" src="<%= currentUser.facebook.profilePic || currentUser.google.profilePic %>">
 						<h1 class="user-name text-uppercase mt-4">
-							<%= currentUser.local.name || currentUser.facebook.name || currentUser.google.name  %>
+							<%= currentUser.facebook.name || currentUser.google.name  %>
 						</h1>
 						<% } %>
-						<div class="form-group">
-							<button type="submit" class="btn bookcycle-btn">Edit Profile</button>
+						<div class="form-group sell-btn">
+							<a href="/editProfile"><button type="submit" class="btn bookcycle-btn">Edit Profile</button></a>
 						</div>
 					</div>
 				</section>
@@ -26,33 +52,50 @@
 		</div>
 
 		<div class="col-sm-9 bookcycle-cards">
-			<nav aria-label="breadcrumb">
+			<!-- <nav aria-label="breadcrumb">
 				<ol class="breadcrumb bg-transparent p-0">
 					<li class="breadcrumb-item"><a href="#">Author</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Humayun Ahmed</li>
 				</ol>
-			</nav>
+			</nav> -->
 
+			<% if (!docs) { %>
+			<h3 class="widget-title">Balance: 0TK</h3>
+			<% }else if (!profile) { %>
+			<h3 class="widget-title">First time Login? Setup Profile Now</h3>
+			<div class="form-group sell-btn">
+				<a href="/editProfile"><button type="submit" class="btn bookcycle-btn">Setup Profile Now</button></a>
+			</div>
+			<% } else { %>
 			<div class="row">
 				<% docs.forEach((book) => { %>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<div class="book-loop mb-4">
+				<div class="col-lg-4 col-md-4 col-sm-6 crd">
+					<div class="book-loop mb-4 crd2">
 						<div class="row">
 							<div class="col-sm-6">
 								<img class="bookcycle-card-img" src="<%= book.bookImg %>" alt="<%= book.name %>">
 							</div>
 							<div class="col-sm-6">
-								<div class="bookcycle-card-body">
-									<h4 class="bookcycle-card-title mb-1">
-										<%= book.name %>
-									</h4>
-									<p class="bookcycle-card-title mb-1">
-										<%= book.author %>
-									</p>
-									<p class="bookcycle-card-title mb-1">
-										<%= book.price %> &#2547;
-									</p>
-									<button class="btn btn-primary btn-sm btn-block">Details</button>
+								<div class="bookcycle-card buy">
+									<div class="bookcycle-card-header">
+										<h4 class="bookcycle-card-title mb-1">
+											<%= book.name %>
+										</h4>
+									</div>
+									<div class="bookcycle-card-body">
+										<p class="bookcycle-card-author mb-1">
+											<%= book.author %>
+										</p>
+										<p class="bookcycle-card-price mb-1">
+											<%= book.price %> &#2547 by
+										</p>
+										<p class="bookcycle-card-price mb-1">
+											<%= book.ownerName  %>
+										</p>
+									</div>
+									<div class="bookcycle-card-footer">
+										<button class="btn btn-outline-light btn-sm btn-block">Withdraw</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -60,6 +103,7 @@
 				</div>
 				<% }) %>
 			</div>
+			<% } %>
 		</div>
 	</div>
 </section>
