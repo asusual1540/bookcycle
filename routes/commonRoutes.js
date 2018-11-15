@@ -25,8 +25,12 @@ router.get(
 )
 
 router.get("/", (req, res) => {
-    res.render("index.ejs", {})
+    Book.find().then(docs => {
+        res.render("index.ejs", { docs })
+    })
 })
 
 
 module.exports = router
+
+

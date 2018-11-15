@@ -80,10 +80,8 @@ router.post(
                             }
                             Book.find({ user: req.user.id }, (err, docs) => {
                                 if (err) return console.log(err)
-                                res.render("view-profile.ejs", {
-                                    profile,
-                                    docs
-                                })
+                                console.log("Profile Updated" + profile)
+                                res.redirect("/myProfile")
                             })
                         })
                 }
@@ -163,8 +161,10 @@ router.get(
                 Profile.findOne({ user: req.user.id })
                     .then(profile => {
                         if (!profile) {
+                            console.log("if block ran")
                             res.redirect("/editProfile")
                         } else {
+                            console.log("else block ran")
                             res.render("view-profile.ejs", {
                                 profile: profile,
                                 docs: docs

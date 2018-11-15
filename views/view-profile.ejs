@@ -38,10 +38,41 @@
 							<% }) %>
 						</div>
 						<% } else { %>
+						<% if (currentUser.local) { %>
+						<img class="img-fluid" src="/images/avatar-b.png">
+						<h1 class="user-name text-uppercase mt-4">
+							<%= profile.fullName %>
+						</h1>
+						<h6 class="">
+							<%= profile.status %>
+						</h6>
+						<div>
+							<h2 class="favBooks">
+								Favourite Books
+							</h2>
+							<% profile.favouriteBooks.forEach(book => { %>
+							<p class="favBook">
+								<%= book %>
+							</p>
+							<% }) %>
+						</div>
+						<div>
+							<h2 class="favBooks">
+								Favourite Authors
+							</h2>
+							<% profile.favouriteAuthors.forEach(author => { %>
+							<p class="favBook">
+								<%= author %>
+							</p>
+							<% }) %>
+						</div>
+						<% } else { %>
 						<img class="img-fluid" src="<%= currentUser.facebook.profilePic || currentUser.google.profilePic %>">
 						<h1 class="user-name text-uppercase mt-4">
-							<%= currentUser.facebook.name || currentUser.google.name  %>
+							<%= profile.fullName %>
 						</h1>
+						<% } %>
+
 						<% } %>
 						<div class="form-group sell-btn">
 							<a href="/editProfile"><button type="submit" class="btn bookcycle-btn">Edit Profile</button></a>
