@@ -27,6 +27,7 @@ router.post(
         var newAuthor = req.body.newAuthor
         var newPrice = req.body.newPrice
         var newImage = req.file.path
+        var language = req.body.language
         var newCategory = req.body.category
         console.log(req.file)
         if (!newBookname) {
@@ -37,8 +38,6 @@ router.post(
             res.status(400).json({ message: 'Provide a price for your book' })
         } else if (!newImage) {
             res.status(400).json({ message: 'Provide an image of your book' })
-        } else if (!newCategory) {
-            res.status(400).json({ message: 'Provide an Category of your book' })
         } else {
             cloudinary.v2.uploader.upload(newImage, {
                 width: 200,
@@ -77,6 +76,7 @@ router.post(
                         bookImg: result.url,
                         author: newAuthor,
                         price: newPrice,
+                        language: language,
                         category: newCategory
                     })
                     Book.create(newBook, (err, freshBook) => {

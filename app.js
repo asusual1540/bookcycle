@@ -20,8 +20,6 @@ Mongoose.connect(
 )
 require('./server/auth/passport')(passport)
 
-
-// const authRoutes = require("./routes/authRoutes")
 const OauthRoutes = require("./routes/OauthRoutes")
 const profileRoutes = require("./routes/profileRoutes")
 const bookRoutes = require("./routes/bookRoutes")
@@ -43,16 +41,14 @@ app.use(session({
 }))
 
 app.use(passport.initialize())
-app.use(passport.session()) // persistent login sessions
+app.use(passport.session())
 app.use(flash())
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user
-  // console.log(req)
   next()
 })
 
-// app.use(authRoutes)
 app.use(profileRoutes)
 app.use(commonRoutes)
 app.use(bookRoutes)

@@ -35,6 +35,34 @@ const ProfileSchema = new Schema({
     location: {
         type: String,
     },
+    balance: {
+        type: Number,
+    },
+    rating: [
+        {
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: "User"
+            },
+            rate: {
+                type: Number
+            }
+        }
+    ],
+    feedback: [
+        {
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: "User"
+            },
+            feed: {
+                type: String
+            }
+        }
+    ],
+    nationalID: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now

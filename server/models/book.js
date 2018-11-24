@@ -34,15 +34,33 @@ var BookSchema = new mongoose.Schema({
     requierd: true,
     trim: true
   },
+  language: {
+    type: String,
+    required: true
+  },
   category: {
     type: String,
     required: true
+  },
+  condition: {
+    type: Number
   },
   likes: [
     {
       user: {
         type: Schema.Types.ObjectId,
         ref: "User"
+      }
+    }
+  ],
+  review: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
+      view: {
+        type: String
       }
     }
   ],

@@ -31,9 +31,14 @@ router.post(
         if (req.body.status) profileFields.status = req.body.status
         if (req.body.location) profileFields.location = req.body.location
         if (req.body.gender) profileFields.gender = req.body.gender
+        if (req.body.nationalID) profileFields.nationalID = req.body.nationalID
 
         if (!req.file) {
-            profileFields.profilePic = ""
+            if (req.user.facebook.profilePic || req.user.google.profilePic) {
+                profileFields.profilePic = req.user.facebook.profilePic || req.user.google.profilePic
+            } else {
+                profileFields.profilePic = ""
+            }
         } else {
             profileFields.profilePic = req.file.path
         }
@@ -63,7 +68,7 @@ router.post(
                             var newProfile = new Profile(profileFields)
                             Profile.create(newProfile, (err, profile) => {
                                 if (err) {
-                                    console.log(err);
+                                    console.log(err)
                                 } else {
                                     Book.find({ user: req.user.id }, (err, docs) => {
                                         if (err) return console.log(err)
