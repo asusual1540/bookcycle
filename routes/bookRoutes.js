@@ -133,6 +133,10 @@ router.get("/sell", (req, res) => {
     })
 })
 
+router.get("/single-book", (req, res) => {
+    res.render("single-book.ejs")
+})
+
 module.exports = router
 
 

@@ -263,4 +263,154 @@ body {
 }
 
 
+.book-info .history {
+  padding: 0 45px 10px;
+    border: 1px solid;
+}
+.book-info .history .heading {
+  background-color: rgba(139,0,0,.75);
+  text-align: center;
+  margin-left: -45px;
+  margin-right: -45px;
+  padding: 15px 0;
+    margin-bottom: 15px;
+}
+.book-info .table td {
+  border: none;
+}
+.book-info .table thead th {
+  border-top: none;
+  border-bottom-width: 1px;
+  font-weight: normal;
+}
+.single-book .btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.related-books-slider .btn-group {
+  position: unset;
+  float: unset;
+}
+.related-books-slider .row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+.related-books-slider .item h4 {
+  font-size: 14px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.related-books-slider .item h5 {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: normal;
+}
+.related-books-slider .item .book-desc {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.related-books-slider .item .user-reactions {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.related-books-slider .item .d-block {
+  margin: 5px 0;
+}
+.related-books-slider .item .btn {
+  font-size: 9px;
+  padding: 2px 5px;
+}
+.related-books-slider .item .wrapper {
+  background-color: rgba(139,0,0,.75);
+    border: 1px solid;
+    padding: 10px;
+}
 
+@media (min-width: 768px) {
+  .related-books-slider .item .wrapper::before,
+  .related-books-slider .item .wrapper::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+  .related-books-slider .item .item-image {
+    width: 41.666667%;
+    float: left;
+    padding-right: 10px;
+  }
+  .related-books-slider .item .item-content {
+    width: 58.333333%;
+    float: left;
+  }
+}
+
+.related-books-slider .slick-list {
+    margin: 0 -5px;
+}
+.related-books-slider .item {
+  padding: 0 5px;
+}
+.related-books-slider .slick-arrow {
+background-color: rgba(139,0,0,.75);
+    width: 25px;
+    height: 25px;
+    border-radius: 30px;
+    border: 1px solid;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    margin-top: -15px;
+}
+.related-books-slider .slick-prev {
+  left: -10px;
+}
+.related-books-slider .slick-next {
+  right: -10px;
+}
+
+.reviews .bordered {
+  border: 1px solid;
+}
+.reviews .comment-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.reviews .comment-list .item {
+  margin-bottom: 50px;
+}
+.reviews .comment-list .item::before,
+.reviews .comment-list .item::after {
+  clear: both;
+  content: '';
+  display: table;
+}
+.reviews .comment-list .avatar {
+  float: left;
+  width: 130px;
+}
+.reviews .comment-list .avatar img {
+  border-radius: 100%;
+}
+.reviews .comment-list .content {
+  float: left;
+  width: calc(100% - 130px);
+}
+.reviews .comment-list p {
+  margin: 0;
+  font-size: 12px;
+}
+.reviews .comment-list .desc {
+  font-size: 14px;
+}
+.reviews .children {
+  margin: 0;
+  list-style-type: none;
+  padding-left: 130px;
+}
