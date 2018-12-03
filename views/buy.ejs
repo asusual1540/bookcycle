@@ -23,6 +23,19 @@
 									<% }) %>
 								</ul>
 							</li>
+							<li>
+								<% if (!cat) { %>
+								<a href="#">No categories</a>
+								<% } else { %>
+								<a href="#">Genre</a>
+								<%} %>
+								<ul class="list-unstyled children cat">
+									<% cat.forEach((item)=>{ %>
+									<li><a href="#">
+											<%= item.name %> </a></li>
+									<% }) %>
+								</ul>
+							</li>
 						</ul>
 					</div>
 				</section>
@@ -66,9 +79,12 @@
 										<p class="bookcycle-card-price mb-1">
 											<%= book.ownerName %>
 										</p>
+										<p class="bookcycle-card-price mb-1">
+											<%= book.category %>
+										</p>
 									</div>
 									<div class="bookcycle-card-footer">
-										<button class="btn btn-outline-light btn-sm btn-block">Buy</button>
+										<a href="/book/<%=book.id%>"><button class="btn btn-outline-light btn-sm btn-block">Details</button></a>
 									</div>
 								</div>
 							</div>

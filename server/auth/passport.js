@@ -156,9 +156,7 @@ module.exports = function (passport) {
                     User.findOne({ 'facebook.id': profile.id }, function (err, user) {
                         if (err)
                             return done(err)
-
                         if (user) {
-
                             // if there is a user id already but no token (user was linked at one point and then removed)
                             if (!user.facebook.token) {
                                 user.facebook.token = token
@@ -168,11 +166,9 @@ module.exports = function (passport) {
                                 user.save(function (err) {
                                     if (err)
                                         return done(err)
-
                                     return done(null, user)
                                 })
                             }
-
                             return done(null, user) // user found, return that user
                         } else {
                             // if there is no user, create them

@@ -20,40 +20,78 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login")
 }
 
+function previous_user_profile(id) {
+    Profile.findOne({ user: id }).then(profile => {
+        if (profile) { return profile } else { return null }
+    })
+}
+
 router.post(
     "/myProfile",
     upload,
     isLoggedIn,
     (req, res) => {
+        var previous_profile = previous_user_profile(req.user.id)
         const profileFields = {}
         profileFields.user = req.user.id
-        if (req.body.fullName) profileFields.fullName = req.body.fullName
-        if (req.body.status) profileFields.status = req.body.status
-        if (req.body.location) profileFields.location = req.body.location
-        if (req.body.gender) profileFields.gender = req.body.gender
-        if (req.body.nationalID) profileFields.nationalID = req.body.nationalID
+        if (req.body.fullName) {
+            profileFields.fullName = req.body.fullName
+        } else {
+            profileFields.fullName = previous_profile.fullName
+        }
+        if (req.body.status) {
+            profileFields.status = req.body.status
+        } else {
+            profileFields.status = previous_profile.status
+        }
+        if (req.body.location) {
+            profileFields.location = req.body.location
+        } else {
+            profileFields.location = previous_profile.location
+        }
+        if (req.body.gender) {
+            profileFields.gender = req.body.gender
+        } else {
+            profileFields.gender = previous_profile.gender
+        }
+        if (req.body.nationalID) {
+            profileFields.nationalID = req.body.nationalID
+        } else {
+            profileFields.nationalID = previous_profile.nationalID
+        }
+
+        if (typeof req.body.favouriteAuthors !== 'undefined') {
+            profileFields.favouriteAuthors = req.body.favouriteAuthors.split(',')
+        } else {
+            profileFields.favouriteAuthors = previous_profile.favouriteAuthors
+        }
+        if (typeof req.body.favouriteBooks !== 'undefined') {
+            profileFields.favouriteBooks = req.body.favouriteBooks.split(',')
+        } else {
+            profileFields.favouriteBooks = previous_profile.favouriteBooks
+        }
 
         if (!req.file) {
             if (req.user.facebook.profilePic || req.user.google.profilePic) {
                 profileFields.profilePic = req.user.facebook.profilePic || req.user.google.profilePic
             } else {
-                profileFields.profilePic = ""
+                Profile.findOne({ user: req.user.id })
+                    .then(profile => {
+                        if (!profile) {
+                            profileFields.profilePic = ""
+                        } else {
+                            profileFields.profilePic = profile.profilePic
+                        }
+                    })
             }
         } else {
             profileFields.profilePic = req.file.path
         }
-
-        if (typeof req.body.favouriteAuthors !== 'undefined') {
-            profileFields.favouriteAuthors = req.body.favouriteAuthors.split(',')
-        }
-        if (typeof req.body.favouriteBooks !== 'undefined') {
-            profileFields.favouriteBooks = req.body.favouriteBooks.split(',')
-        }
         Profile.findOne({ user: req.user.id })
             .then(profile => {
+
                 if (!profile) {
-                    console.log("else blog" + profile)
-                    //create
+
                     cloudinary.v2.uploader.upload(profileFields.profilePic, {
                         width: 200,
                         height: 200,
@@ -78,21 +116,38 @@ router.post(
                             })
                         })
                 } else {
-                    Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true })
-                        .then(profile => {
-                            if (!profile) {
-                                return res.json({ error: "No Profile can be updated" })
+                    console.log("bal")
+                    cloudinary.v2.uploader.upload(profileFields.profilePic, {
+                        width: 200,
+                        height: 200,
+                        crop: "fill"
+                    },
+                        (err, result) => {
+                            if (err) {
+                                console.log("no image was saved to cloudinary and was provided")
+                            } else {
+                                profileFields.profilePic = result.url
                             }
-                            Book.find({ user: req.user.id }, (err, docs) => {
-                                if (err) return console.log(err)
-                                console.log("Profile Updated" + profile)
-                                res.redirect("/myProfile")
-                            })
+                            Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true })
+                                .then(profile => {
+                                    if (!profile) {
+                                        return res.json({ error: "No Profile can be updated" })
+                                    }
+                                    Profile.find({ user: req.user.id }, (err, docs) => {
+                                        if (err) return console.log(err)
+                                        console.log("Profile Updated" + profile)
+                                        res.redirect("/myProfile")
+                                    })
+                                })
                         })
                 }
             })
     }
 )
+
+
+
+
 
 
 router.get(

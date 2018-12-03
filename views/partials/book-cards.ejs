@@ -27,9 +27,12 @@
                                         <p class="bookcycle-card-price mb-1">
                                             <%= book.ownerName %>
                                         </p>
+                                        <p class="bookcycle-card-price mb-1">
+                                            <%= book.category %>
+                                        </p>
                                     </div>
-                                    <div class="bookcycle-card-footer">
-                                        <button class="btn btn-outline-light btn-sm btn-block">Buy</button>
+                                    <div class="bookcycle-card-footer"><a href="/book/<%=book.id%>">
+                                            <button class="btn btn-outline-light btn-sm btn-block">Details</button></a>
                                     </div>
                                 </div>
                             </div>
