@@ -3,6 +3,7 @@ const router = express.Router()
 const { Book } = require("../server/models/book")
 const { Author } = require("../server/models/author")
 const { Category } = require("../server/models/category")
+const Cart = require("../server/models/cart")
 const upload = require("../server/middleware/multer")
 const cloudinary = require('cloudinary')
 const ObjectID = require('mongodb').ObjectID
@@ -150,36 +151,35 @@ router.get("/book/:id", (req, res) => {
     }
 
     var related_books = []
+    var books = []
     Book.findById(id).then(
         book => {
             if (!book) {
                 return res.send("Incorrect id..")
             }
-            Book.find().or([{ language: book.language }, { author: book.author }, { category: book.category }])
-                .then(books => { related_books.push(...books) })
-                .catch(error => { console.log(error) })
-            related_books.forEach((item) => {
-                console.log(item)
-            })
-            Book.find({ name: book.name }).then(
-                books => {
-                    if (!books) {
-                        console.log("no simillar books")
-                        res.render("single-book.ejs", {
-                            book: book,
-                            related_books: related_books
-                        })
-                    } else {
-                        console.log("else block run")
-                        books.forEach((book) => {
-                            console.log(book.ownerName)
-                        })
-                        res.render("single-book.ejs", {
-                            book: book,
-                            books: books,
-                            related_books: related_books
-                        })
+
+
+            Book.find({ $or: [{ 'author': book.author }, { 'category': book.category }, { 'language': book.language }] }).then(
+                related => {
+                    if (related) {
+                        related_books = related
                     }
+
+                    Book.find({ $and: [{ 'author': book.author }, { 'name': book.name }] }).then(
+                        _books => {
+
+                            if (_books) {
+                                books = _books
+                            }
+
+                            res.render("single-book.ejs", {
+                                book: book,
+                                books: books,
+                                related_books: related_books
+                            })
+
+                        })
+
                 })
 
         },
@@ -188,6 +188,7 @@ router.get("/book/:id", (req, res) => {
         }
     )
 })
+
 
 router.get(
     "/buy",
@@ -217,6 +218,47 @@ router.get("/sell", (req, res) => {
 
 router.get("/single-book", (req, res) => {
     res.render("single-book.ejs")
+})
+
+
+router.post("/book/like/:id", (req, res) => {
+    var id = req.params.id
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send("Id not valid")
+    }
+
+    Book.findById(id).then(
+        book => {
+            if (!book) {
+                return res.send("Incorrect id..")
+            }
+            Book.find({ $and: [{ 'author': book.author }, { 'name': book.name }] }).then(
+                _books => {
+                    _books.forEach(item => {
+                        item.likes.push(req.user.id)
+                    })
+                })
+            no_of_likes = book.likes.length
+            console.log(no_of_likes)
+        }
+    )
+})
+
+router.get("/add-to-cart/:id", (req, res) => {
+    var productId = req.params.id
+    var cart = new Cart(req.session.cart ? req.session.cart : {})
+
+    Book.findById(productId).then(
+        book => {
+            if (!book) {
+                res.json({ msg: "no book" })
+            }
+            cart.add(book, book.id)
+            req.session.cart = cart
+            console.log(req.session.cart)
+            res.redirect("/")
+        }
+    )
 })
 
 

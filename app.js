@@ -37,7 +37,8 @@ app.use(session({
   secret: 'Iamkira1540',
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: Mongoose.connection })
+  store: new MongoStore({ mongooseConnection: Mongoose.connection }),
+  cookie: { maxAge: 60 * 60 * 1000 }
 }))
 
 app.use(passport.initialize())
@@ -46,6 +47,7 @@ app.use(flash())
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user
+  res.locals.session = req.session
   next()
 })
 

@@ -25,7 +25,7 @@
             <h4>
               <%= book.author %>
             </h4>
-            <div class="user-reactions"><a href="/"><i class="fas fa-thumbs-up"></i></a>
+            <div class="user-reactions"><a href="/book/like/<%=book._id%>"><i class="fas fa-thumbs-up"></i></a>
 
               <%=book.likes.length%>
             </div>
@@ -71,7 +71,7 @@
                     <td>
                       <%= book.price%>
                     </td>
-                    <td><button class="btn btn-sm">Buy</button></td>
+                    <td><a href="/add-to-cart/<%=book._id%>"><button class="btn btn-sm">Buy</button></a></td>
                   </tr>
                   <% })%>
                 </tbody>
@@ -100,7 +100,9 @@
 
               <div class="item-content">
                 <h4>
-                  <%=related_book.name%>
+                  <a style="color:inherit;" href="/book/<%=related_book._id%>">
+                    <%=related_book.name%></a>
+
                 </h4>
                 <h5><i>
                     <%=related_book.author%></i></h5>

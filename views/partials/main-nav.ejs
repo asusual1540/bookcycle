@@ -22,6 +22,12 @@
 					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 					<li class="nav-item"><a class="nav-link" href="/myProfile">
 							<%= currentUser.local.name || currentUser.facebook.name || currentUser.google.name  %></a></li>
+					<li><a href="#">
+							<img src="/images/shopping-cart.svg" height="20" alt="">
+							<span class="" style="color:white">
+								<%=session.cart.totalQty%></span>
+
+						</a></li>
 					<% } %>
 				</ul>
 			</div>
