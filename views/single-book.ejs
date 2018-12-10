@@ -66,7 +66,7 @@
                       <%= book.date.toString().slice(0, 15)%>
                     </td>
                     <td>
-                      <%= book.user%>
+                      <%= book.user.id%>
                     </td>
                     <td>
                       <%= book.price%>
@@ -176,7 +176,7 @@
         <div class="p-4 bordered">
           <ul class="comment-list">
             <li>
-              <div class="item">
+              <!-- <div class="item">
                 <div class="avatar">
                   <img src="https://via.placeholder.com/100x100" alt="" class="img-fluid">
                 </div>
@@ -190,9 +190,9 @@
                     expedita veritatis perferendis quaerat hic!
                   </div>
                 </div>
-              </div>
+              </div> -->
 
-              <ul class="children">
+              <!-- <ul class="children">
                 <li>
                   <div class="item">
                     <div class="avatar">
@@ -210,17 +210,21 @@
                     </div>
                   </div>
                 </li>
-              </ul>
+              </ul> -->
             </li>
 
             <li>
               <div class="item">
                 <div class="avatar">
-                  <img src="https://via.placeholder.com/100x100" alt="" class="img-fluid">
+                  <img src="<%=profile.profilePic%>" alt="cant display" class="img-fluid">
                 </div>
                 <div class="content">
-                  <h4>Samir Ashraf</h4>
-                  <p>Member since 5th July, 2018</p>
+                  <h4>
+                    <%=profile.fullName%>
+                  </h4>
+                  <p>Member since
+                    <%=currentUser.date.toString().slice(0, 15)%>
+                  </p>
                   <p>5 Star</p>
                   <div class="desc mt-2">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, eos ipsa similique quas dolor

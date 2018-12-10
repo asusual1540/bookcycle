@@ -3,6 +3,7 @@ const router = express.Router()
 const { Book } = require("../server/models/book")
 const { Author } = require("../server/models/author")
 const { Category } = require("../server/models/category")
+const { Profile } = require("../server/models/profile")
 const Cart = require("../server/models/cart")
 const upload = require("../server/middleware/multer")
 const cloudinary = require('cloudinary')
@@ -119,8 +120,21 @@ router.post(
                             console.log(err)
                         })
                     var username = req.user.local.name || req.user.facebook.name || req.user.google.name
+                    var linkedProfile
+                    Profile.findOne({ user: req.user.id }).then(
+                        profile => {
+                            if (profile) {
+                                linkedProfile = profile
+                                console.log("PROFILE" + linkedProfile)
+                            }
+                            else {
+                                console.log("no profile assigned")
+                            }
+                        }
+                    )
                     var newBook = new Book({
                         user: req.user.id,
+                        // userProfile: linkedProfile.id,
                         ownerName: username,
                         name: newBookname.toLowerCase(),
                         bookImg: result.url,
@@ -133,6 +147,7 @@ router.post(
                         if (err) {
                             console.log(err);
                         } else {
+                            console.log("FRESHBOOK" + freshBook)
                             res.redirect("/buy");
                         }
                     })
@@ -157,29 +172,28 @@ router.get("/book/:id", (req, res) => {
             if (!book) {
                 return res.send("Incorrect id..")
             }
-
-
             Book.find({ $or: [{ 'author': book.author }, { 'category': book.category }, { 'language': book.language }] }).then(
                 related => {
                     if (related) {
                         related_books = related
                     }
-
                     Book.find({ $and: [{ 'author': book.author }, { 'name': book.name }] }).then(
                         _books => {
-
                             if (_books) {
                                 books = _books
                             }
-
-                            res.render("single-book.ejs", {
-                                book: book,
-                                books: books,
-                                related_books: related_books
-                            })
-
+                            Profile.findOne({ user: req.user.id })
+                                .then(
+                                    profile => {
+                                        res.render("single-book.ejs", {
+                                            book: book,
+                                            books: books,
+                                            related_books: related_books,
+                                            profile: profile
+                                        })
+                                    }
+                                )
                         })
-
                 })
 
         },
@@ -259,6 +273,10 @@ router.get("/add-to-cart/:id", (req, res) => {
             res.redirect("/")
         }
     )
+})
+
+router.get("/cart", (req, res) => {
+    res.render("cart-view.ejs")
 })
 
 

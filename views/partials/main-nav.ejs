@@ -12,9 +12,8 @@
 			<div class="collapse navbar-collapse" id="main-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="/buy">BookBuy</a></li>
-					<li class="nav-item"><a class="nav-link" href="/sell">BookSell</a></li>
-					<li class="nav-item"><a class="nav-link" href="/privacy-policy">Privacy Policy</a></li>
+					<li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
+					<li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
 					<% if (!currentUser) { %>
 					<li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
 					<li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
@@ -22,10 +21,12 @@
 					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 					<li class="nav-item"><a class="nav-link" href="/myProfile">
 							<%= currentUser.local.name || currentUser.facebook.name || currentUser.google.name  %></a></li>
-					<li><a href="#">
+					<li><a href="/cart">
 							<img src="/images/shopping-cart.svg" height="20" alt="">
+							<% if (session.cart) { %>
 							<span class="" style="color:white">
 								<%=session.cart.totalQty%></span>
+							<% } %>
 
 						</a></li>
 					<% } %>

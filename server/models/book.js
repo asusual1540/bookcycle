@@ -6,6 +6,10 @@ var BookSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
+  userProfile: {
+    type: Schema.Types.ObjectId,
+    ref: "Profile"
+  },
   ownerName: {
     type: String,
     required: true,
