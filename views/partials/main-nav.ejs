@@ -21,10 +21,10 @@
 					<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 					<li class="nav-item"><a class="nav-link" href="/myProfile">
 							<%= currentUser.local.name || currentUser.facebook.name || currentUser.google.name  %></a></li>
-					<li><a href="/cart">
+					<li class="nav-item"><a class="nav-link cart-link" href="/cart">
 							<img src="/images/shopping-cart.svg" height="20" alt="">
 							<% if (session.cart) { %>
-							<span class="" style="color:white">
+							<span class="bg-success">
 								<%=session.cart.totalQty%></span>
 							<% } %>
 

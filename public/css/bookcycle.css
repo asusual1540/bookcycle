@@ -131,13 +131,13 @@ body {
   padding-right: 3px;
   padding-left: 3px;
 }
-.navbar-nav .nav-item .nav-link {
+.navbar-nav .nav-item .nav-link:not(.cart-link) {
   color: #fff;
   text-decoration: none;
   margin-left: 20px;
   text-transform: uppercase;
 }
-.navbar-nav .nav-item .nav-link:hover {
+.navbar-nav .nav-item .nav-link:not(.cart-link):hover {
   background-color: #fff;
   color: black;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
@@ -413,4 +413,33 @@ background-color: rgba(139,0,0,.75);
   margin: 0;
   list-style-type: none;
   padding-left: 130px;
+}
+
+.cart-link span {
+  position: relative;
+    width: 20px;
+    display: inline-block;
+    color: #fff;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    top: -10px;
+    left: -13px;
+}
+
+
+.bookcycle-search-bar .form-control {
+  background-color: transparent;
+  color: #fff;
+}
+
+.bookcycle-search-bar ::placeholder {
+  color: #fff;
+}
+
+.bookcycle-search-bar .input-group-text {
+  background-color: transparent;
+  color: #fff;
 }

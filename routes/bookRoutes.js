@@ -276,7 +276,7 @@ router.get("/add-to-cart/:id", (req, res) => {
 })
 
 router.get("/cart", (req, res) => {
-    res.render("cart-view.ejs")
+    res.render("cart.ejs")
 })
 
 
