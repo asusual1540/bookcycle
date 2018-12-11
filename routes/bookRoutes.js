@@ -138,10 +138,10 @@ router.post(
                         ownerName: username,
                         name: newBookname.toLowerCase(),
                         bookImg: result.url,
-                        author: newAuthor,
+                        author: newAuthor.toLowerCase(),
                         price: newPrice,
                         language: language,
-                        category: newCategory
+                        category: newCategory.toLowerCase()
                     })
                     Book.create(newBook, (err, freshBook) => {
                         if (err) {
@@ -201,6 +201,41 @@ router.get("/book/:id", (req, res) => {
             res.status(404).send(err)
         }
     )
+})
+
+
+router.get("/author/:name", (req, res) => {
+    var authorName = req.params.name
+    console.log(authorName)
+    Book.find({ author: authorName }).then(docs => {
+        console.log(docs)
+        Author.find().then(author => {
+            Category.find().then(cat => {
+                res.render("buy.ejs", {
+                    docs: docs,
+                    author: author,
+                    cat: cat
+                })
+            })
+        })
+    })
+})
+
+router.get("/category/:name", (req, res) => {
+    var categoryName = req.params.name
+    console.log(categoryName)
+    Book.find({ category: categoryName }).then(docs => {
+        console.log(docs)
+        Author.find().then(author => {
+            Category.find().then(cat => {
+                res.render("buy.ejs", {
+                    docs: docs,
+                    author: author,
+                    cat: cat
+                })
+            })
+        })
+    })
 })
 
 
@@ -269,16 +304,34 @@ router.get("/add-to-cart/:id", (req, res) => {
             }
             cart.add(book, book.id)
             req.session.cart = cart
-            console.log(req.session.cart)
-            res.redirect("/")
+            console.log(req.session.cart.item)
+            res.redirect("/buy")
         }
     )
 })
 
-router.get("/cart", (req, res) => {
-    res.render("cart.ejs")
+router.get("/reduce/:id", (req, res) => {
+    var productId = req.params.id
+    var cart = new Cart(req.session.cart ? req.session.cart : {})
+
+    cart.reduceByOne(productId)
+    req.session.cart = cart
+    res.redirect("/cart")
 })
 
+router.get("/cart", (req, res) => {
+    if (!req.session.cart) {
+        return res.render("cart.ejs", { products: null })
+    }
+    var cart = new Cart(req.session.cart)
+    var cartArray = cart.generateArray()
+
+    res.render("cart.ejs", {
+        products: cartArray,
+        totalprice: cart.totalprice,
+        totalQty: cart.totalQty
+    })
+})
 
 module.exports = router
 

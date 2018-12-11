@@ -239,6 +239,23 @@ router.get(
     }
 )
 
+
+router.post("/add-fund/", (req, res) => {
+    var amount = Number(req.body.amount)
+    console.log("recharge amount" + amount)
+    Profile.findOne({ user: req.user.id })
+        .then(
+            profile => {
+                if (profile) {
+                    console.log("profile found" + profile)
+                    profile.balance += amount
+                }
+                profile.save()
+                console.log("Current balance " + profile.balance)
+                res.redirect("/myProfile")
+            }
+        )
+})
 module.exports = router
 
 

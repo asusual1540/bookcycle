@@ -12,26 +12,26 @@
 						<ul class="list-unstyled">
 							<li>
 								<% if (!author) { %>
-								<a href="#">No categories</a>
+								<a href="#">No Authors</a>
 								<% } else { %>
 								<a href="#">Author</a>
 								<%} %>
 								<ul class="list-unstyled children cat">
 									<% author.forEach((AuthorName)=>{ %>
-									<li><a href="#">
+									<li><a href="/author/<%= AuthorName.name %>">
 											<%= AuthorName.name %></a></li>
 									<% }) %>
 								</ul>
 							</li>
 							<li>
 								<% if (!cat) { %>
-								<a href="#">No categories</a>
+								<a href="#">No Categories</a>
 								<% } else { %>
 								<a href="#">Genre</a>
 								<%} %>
 								<ul class="list-unstyled children cat">
 									<% cat.forEach((item)=>{ %>
-									<li><a href="#">
+									<li><a href="/category/<%= item.name %>">
 											<%= item.name %> </a></li>
 									<% }) %>
 								</ul>
@@ -65,9 +65,12 @@
 							<div class="col-sm-6">
 								<div class="bookcycle-card buy">
 									<div class="bookcycle-card-header">
-										<h4 class="bookcycle-card-title mb-1">
-											<%= book.name %>
-										</h4>
+										<a href="/book/<%=book.id%>" style="color: inherit">
+											<h4 class="bookcycle-card-title mb-1">
+												<%= book.name %>
+											</h4>
+										</a>
+
 									</div>
 									<div class="bookcycle-card-body">
 										<p class="bookcycle-card-author mb-1">

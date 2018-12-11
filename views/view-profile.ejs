@@ -7,7 +7,10 @@
 		<div class="col-sm-3">
 			<div class="sidebar">
 				<section class="widget user-info">
-					<h3 class="widget-title">Balance: 0TK</h3>
+					<h3 class="widget-title">
+						Balance -
+						<%=profile.balance%> tk
+					</h3>
 					<div class="widget-content">
 						<% if (profile.profilePic) { %>
 						<img class="img-fluid" src="<%= profile.profilePic %>" alt="">
@@ -89,9 +92,16 @@
 					<li class="breadcrumb-item active" aria-current="page">Humayun Ahmed</li>
 				</ol>
 			</nav> -->
+			<form class="form-inline" action="/add-fund/" method="POST">
+				<div class="form-group mx-sm-3 mb-2">
+					<label for="inputPassword2" class="sr-only">Amount</label>
+					<input type="text" class="form-control" name="amount" id="inputPassword2" placeholder="Amount">
+				</div>
+				<button type="submit" class="btn btn-primary mb-2 ">Add</button>
+			</form>
 
 			<% if (!docs) { %>
-			<h3 class="widget-title">Balance: 0TK</h3>
+			<!-- <h3 class="widget-title">Balance: 0TK</h3> -->
 			<% }else if (!profile) { %>
 			<h3 class="widget-title">First time Login? Setup Profile Now</h3>
 			<div class="form-group sell-btn">

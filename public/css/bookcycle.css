@@ -218,6 +218,7 @@ body {
 .category {
   background-color: rgba(139,0,0,.75);
   padding-top : 15px;
+  min-height: 375px;
 }
 
 /* .sellbox{
@@ -429,10 +430,14 @@ background-color: rgba(139,0,0,.75);
     left: -13px;
 }
 
+.bookcycle-search-bar {
+  margin-bottom : 30px;
+}
 
 .bookcycle-search-bar .form-control {
   background-color: transparent;
   color: #fff;
+  
 }
 
 .bookcycle-search-bar ::placeholder {

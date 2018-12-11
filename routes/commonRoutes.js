@@ -30,6 +30,13 @@ router.get("/", (req, res) => {
     })
 })
 
+// router.get("/search/:input", (req, res) => {
+//     var input = req.params.input
+//     console.log(input)
+//     Book.find({ $or: [{ 'author': input }, { 'name': input }, { 'category': input }] }).then(docs => {
+//         res.render("index.ejs", { docs })
+//     })
+// })
 
 module.exports = router
 

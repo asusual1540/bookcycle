@@ -15,7 +15,7 @@ const ProfileSchema = new Schema({
         required: true
     },
     status: {
-        type: String,
+        type: String
     },
     favouriteAuthors: {
         type: [String],
@@ -26,17 +26,18 @@ const ProfileSchema = new Schema({
         min: 1
     },
     profilePic: {
-        type: String,
+        type: String
     },
     ownedBooks: {
         type: [Schema.Types.ObjectId],
         ref: "Book"
     },
     location: {
-        type: String,
+        type: String
     },
     balance: {
         type: Number,
+        default: 0
     },
     rating: [
         {

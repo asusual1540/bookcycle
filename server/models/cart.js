@@ -14,6 +14,17 @@ module.exports = function Cart(oldCart) {
         this.totalprice += storedItem.item.price
     }
 
+    this.reduceByOne = function (id) {
+        this.items[id].qty--
+        this.items[id].price -= this.items[id].item.price
+        this.totalQty--
+        this.totalprice -= this.items[id].item.price
+
+        if (this.items[id].qty <= 0) {
+            delete this.items[id]
+        }
+    }
+
     this.generateArray = function () {
         var arr = []
         for (let id in this.items) {
@@ -21,4 +32,5 @@ module.exports = function Cart(oldCart) {
         }
         return arr
     }
+
 }

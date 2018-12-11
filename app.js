@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set("view engine", ejs)
 
 app.use(session({
-  secret: 'Iamkira1540',
+  secret: config.secretKey,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({ mongooseConnection: Mongoose.connection }),
