@@ -7,12 +7,10 @@ const ProfileSchema = new Schema({
         ref: "User"
     },
     fullName: {
-        type: String,
-        required: true
+        type: String
     },
     gender: {
-        type: String,
-        required: true
+        type: String
     },
     status: {
         type: String
@@ -29,6 +27,10 @@ const ProfileSchema = new Schema({
         type: String
     },
     ownedBooks: {
+        type: [Schema.Types.ObjectId],
+        ref: "Book"
+    },
+    boughtBooks: {
         type: [Schema.Types.ObjectId],
         ref: "Book"
     },

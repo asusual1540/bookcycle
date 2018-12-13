@@ -13,7 +13,7 @@
           <th>Name</th>
           <th>QTY</th>
           <th>Price</th>
-          <th>Total Price</th>
+          <th>Action</th>
         </tr>
       </thead>
 
@@ -48,14 +48,15 @@
       </div>
       <br>
 
-      <div class="float-sm-left">Available Balance: 500TK</div>
+      <div class="float-sm-left">Available Balance:
+        <%=profile.balance%> tk</div>
       <div class="float-sm-right">
-        <a href="" class="btn btn-success">Proceed</a>
+        <a href="/buy" class="btn btn-success">Continue Shopping</a>
+        <a href="/cart" class="btn btn-success">Checkout</a>
       </div>
     </div>
     <% } else { %>
-    <h2>NO ITEMS IN YOUR CART</h2>
-    <div class="float-sm-left">Available Balance: 500TK</div>
+    <h2 style="text-align : center">NO ITEMS IN YOUR CART</h2>
     <% } %>
 
   </div>

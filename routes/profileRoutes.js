@@ -3,9 +3,11 @@ const router = express.Router()
 const { User } = require("../server/models/user")
 const { Profile } = require("../server/models/profile")
 const { Book } = require("../server/models/book")
+const Cart = require("../server/models/cart")
 const { ObjectID } = require("mongodb")
 const upload = require("../server/middleware/multer")
 const cloudinary = require('cloudinary')
+
 
 cloudinary.config({
     cloud_name: 'bookcycle',
@@ -221,10 +223,8 @@ router.get(
                 Profile.findOne({ user: req.user.id })
                     .then(profile => {
                         if (!profile) {
-                            console.log("if block ran")
                             res.redirect("/editProfile")
                         } else {
-                            console.log("else block ran")
                             res.render("view-profile.ejs", {
                                 profile: profile,
                                 docs: docs
@@ -251,11 +251,93 @@ router.post("/add-fund/", (req, res) => {
                     profile.balance += amount
                 }
                 profile.save()
-                console.log("Current balance " + profile.balance)
                 res.redirect("/myProfile")
             }
         )
 })
+
+function transfer(arr, bookID_to_transfer, sellerID, buyerID, callback) {
+    arr.forEach(item => {
+        Book.findById(bookID_to_transfer).then(
+            book => {
+                Profile.findOne({ user: buyerID }).then(
+                    buyer => {
+                        Profile.findOne({ user: sellerID }).then(
+                            seller => {
+                                if (buyer.balance < book.price) {
+                                    res.json({ msg: "Not enough balance to buy" })
+                                } else {
+                                    buyer.balance -= book.price
+                                    seller.balance += book.price
+                                    for (var i = 0; i < seller.ownedBooks.length - 1; i++) {
+                                        if (array[i] === book.id) {
+                                            arr.splice(i, 1)
+                                        }
+                                    }
+                                    buyer.boughtBooks.push(book.id)
+                                    book.user = buyer.user
+                                    book.ownerName = buyer.fullName
+                                    book.save()
+                                    buyer.save()
+                                    seller.save()
+                                    cart.reduceByOne(book_id)
+                                }
+                            }
+                        )
+                    }
+                )
+            }
+        )
+    })
+    callback()
+}
+
+router.get("/check-out", (req, res) => {
+    var cart = new Cart(req.session.cart)
+    var products = cart.generateArray()
+    products.forEach(product => {
+        book_id = product.item._id
+        previous_owner_name = product.item.ownerName
+        previous_owner_id = product.item.user
+        console.log("Book to sell --> " + book_id)
+        console.log("Buyer --> " + req.user.id)
+        console.log("Seller --> " + previous_owner_id)
+        Book.findById(book_id).then(
+            book => {
+                Profile.findOne({ user: req.user.id }).then(
+                    buyer => {
+                        Profile.findOne({ user: previous_owner_id }).then(
+                            seller => {
+                                if (buyer.balance < book.price) {
+                                    res.json({ msg: "Not enough balance to buy" })
+                                } else {
+                                    buyer.balance -= book.price
+                                    seller.balance += book.price
+                                    for (var i = 0; i < seller.ownedBooks.length - 1; i++) {
+                                        if (array[i] === book.id) {
+                                            arr.splice(i, 1)
+                                        }
+                                    }
+                                    buyer.boughtBooks.push(book.id)
+                                    book.user = buyer.user
+                                    book.ownerName = buyer.fullName
+                                    book.save()
+                                    buyer.save()
+                                    seller.save()
+                                    cart.reduceByOne(book_id)
+                                }
+                            }
+                        )
+                    }
+                )
+            }
+        )
+    })
+    Promise.all()
+        .then((result) => res.redirect("/myProfile"))
+        .catch((err) => res.send(err))
+})
+
 module.exports = router
 
 

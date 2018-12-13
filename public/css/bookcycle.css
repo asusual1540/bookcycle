@@ -161,6 +161,8 @@ body {
   color: #fff;
 }
 
+
+
 .book-loop {
   background-color: rgba(139,0,0,.75);
   color: #fff;
@@ -447,4 +449,27 @@ background-color: rgba(139,0,0,.75);
 .bookcycle-search-bar .input-group-text {
   background-color: transparent;
   color: #fff;
+}
+
+
+#inputpassword2{
+  background-color: transparent;
+  color : #fff;
+}
+.form-control {
+  background-color: transparent;
+  color: #fff;
+  border : 1px solid #fff;
+  margin-right : 1rem;
+ 
+}
+
+.title-text {
+  font-size : 1.4rem;
+  font-weight : bold;
+  color: #fff;
+}
+
+.recharge {
+  margin-bottom : 2rem;
 }

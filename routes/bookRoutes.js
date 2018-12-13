@@ -120,21 +120,8 @@ router.post(
                             console.log(err)
                         })
                     var username = req.user.local.name || req.user.facebook.name || req.user.google.name
-                    var linkedProfile
-                    Profile.findOne({ user: req.user.id }).then(
-                        profile => {
-                            if (profile) {
-                                linkedProfile = profile
-                                console.log("PROFILE" + linkedProfile)
-                            }
-                            else {
-                                console.log("no profile assigned")
-                            }
-                        }
-                    )
                     var newBook = new Book({
                         user: req.user.id,
-                        // userProfile: linkedProfile.id,
                         ownerName: username,
                         name: newBookname.toLowerCase(),
                         bookImg: result.url,
@@ -145,12 +132,26 @@ router.post(
                     })
                     Book.create(newBook, (err, freshBook) => {
                         if (err) {
-                            console.log(err);
+                            console.log(err)
                         } else {
-                            console.log("FRESHBOOK" + freshBook)
-                            res.redirect("/buy");
+                            Profile.findOne({ user: req.user.id }).then(
+                                profile => {
+                                    if (!profile) {
+                                        console.log("profile not found to insert book")
+                                    }
+                                    profile.ownedBooks.push(freshBook.id)
+                                    profile.save().then(
+                                        pro => {
+                                            console.log(pro)
+                                        }
+                                    )
+                                }
+                            )
+                            res.redirect("/buy")
                         }
                     })
+
+
                 })
         }
     }
@@ -160,39 +161,40 @@ router.post(
 
 //show single book by attributes like here is id
 router.get("/book/:id", (req, res) => {
-    var id = req.params.id;
+    var id = req.params.id
+
     if (!ObjectID.isValid(id)) {
         return res.status(404).send("Id not valid")
     }
+    console.log(id)
 
     var related_books = []
     var books = []
+
     Book.findById(id).then(
         book => {
             if (!book) {
                 return res.send("Incorrect id..")
             }
+            console.log(book)
             Book.find({ $or: [{ 'author': book.author }, { 'category': book.category }, { 'language': book.language }] }).then(
                 related => {
                     if (related) {
                         related_books = related
                     }
+                    console.log("found related books")
                     Book.find({ $and: [{ 'author': book.author }, { 'name': book.name }] }).then(
                         _books => {
                             if (_books) {
                                 books = _books
                             }
-                            Profile.findOne({ user: req.user.id })
-                                .then(
-                                    profile => {
-                                        res.render("single-book.ejs", {
-                                            book: book,
-                                            books: books,
-                                            related_books: related_books,
-                                            profile: profile
-                                        })
-                                    }
-                                )
+                            console.log("found simillar books")
+                            res.render("single-book.ejs", {
+                                book: book,
+                                books: books,
+                                related_books: related_books
+                            })
+
                         })
                 })
 
@@ -206,6 +208,7 @@ router.get("/book/:id", (req, res) => {
 
 router.get("/author/:name", (req, res) => {
     var authorName = req.params.name
+    var input = ''
     console.log(authorName)
     Book.find({ author: authorName }).then(docs => {
         console.log(docs)
@@ -214,7 +217,8 @@ router.get("/author/:name", (req, res) => {
                 res.render("buy.ejs", {
                     docs: docs,
                     author: author,
-                    cat: cat
+                    cat: cat,
+                    input: input
                 })
             })
         })
@@ -223,6 +227,7 @@ router.get("/author/:name", (req, res) => {
 
 router.get("/category/:name", (req, res) => {
     var categoryName = req.params.name
+    var input = ''
     console.log(categoryName)
     Book.find({ category: categoryName }).then(docs => {
         console.log(docs)
@@ -231,7 +236,8 @@ router.get("/category/:name", (req, res) => {
                 res.render("buy.ejs", {
                     docs: docs,
                     author: author,
-                    cat: cat
+                    cat: cat,
+                    input: input
                 })
             })
         })
@@ -242,13 +248,15 @@ router.get("/category/:name", (req, res) => {
 router.get(
     "/buy",
     (req, res) => {
+        var input = ''
         Book.find().then(docs => {
             Author.find().then(author => {
                 Category.find().then(cat => {
                     res.render("buy.ejs", {
                         docs: docs,
                         author: author,
-                        cat: cat
+                        cat: cat,
+                        input: input
                     })
                 })
             })
@@ -297,6 +305,10 @@ router.get("/add-to-cart/:id", (req, res) => {
     var productId = req.params.id
     var cart = new Cart(req.session.cart ? req.session.cart : {})
 
+    if (!req.user) {
+        res.redirect("/login")
+    }
+
     Book.findById(productId).then(
         book => {
             if (!book) {
@@ -324,13 +336,38 @@ router.get("/cart", (req, res) => {
         return res.render("cart.ejs", { products: null })
     }
     var cart = new Cart(req.session.cart)
-    var cartArray = cart.generateArray()
+    var products = cart.generateArray()
+    Profile.findOne({ user: req.user.id }).then(
+        profile => {
+            res.render("cart.ejs", {
+                products: products,
+                totalprice: cart.totalprice,
+                totalQty: cart.totalQty,
+                profile: profile
+            })
+        }
+    )
 
-    res.render("cart.ejs", {
-        products: cartArray,
-        totalprice: cart.totalprice,
-        totalQty: cart.totalQty
-    })
+})
+
+
+router.get("/delete-book/:id", (req, res) => {
+    var id = req.params.id
+
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send("Id not valid")
+    }
+
+    Book.findById({ _id: id }).then(
+        book => {
+            if (!book) {
+                res.json({ msg: "Book not found" })
+            }
+            console.log("book found to delete" + book)
+            book.remove()
+            res.redirect("/myProfile")
+        }
+    )
 })
 
 module.exports = router

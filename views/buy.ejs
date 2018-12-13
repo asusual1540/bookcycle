@@ -3,6 +3,18 @@
 <% include partials/main-nav %>
 
 <section class="container">
+	<h1 class="page-header text-center">Browse Book Store</h1>
+	<form class="form-inline" action="/search" method="POST">
+		<div class="col-sm-4 offset-sm-4">
+			<div class="input-group bookcycle-search-bar">
+				<input type="text" class="form-control" name="input" placeholder="Search Any Book" aria-label="Search Any Book"
+				 aria-describedby="btnGroupAddon">
+				<div class="input-group-append">
+					<button class="input-group-text" type="submit" id="btnGroupAddon"><i class="fas fa-search" style="color: white"></i></button>
+				</div>
+			</div>
+		</div>
+	</form>
 	<div class="row">
 		<div class="col-sm-3 category">
 			<div class="sidebar">
@@ -42,17 +54,18 @@
 			</div>
 		</div>
 		<div class="col-sm-9 bookcycle-cards">
-			<!-- <nav aria-label="breadcrumb">
+			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb bg-transparent p-0">
-					<% if (!author) { %>
-					<li class="breadcrumb-item"><a href="#">No Categories</a></li>
+					<% if (input.length <= 0) { %>
+					<li class="breadcrumb-item"><a href="#">All Books</a></li>
 					<% } else{ %>
-					<li class="breadcrumb-item"><a href="#">Author</a></li>
+					<li class="breadcrumb-item"><a href="#">Search Results for
+							<%=input%>
+						</a></li>
+					<li class="breadcrumb-item"><a href="/buy">(Cancel Search)</a></li>
 					<% } %>
-
-
 				</ol>
-			</nav> -->
+			</nav>
 
 			<div class="row">
 				<% docs.forEach((book) => { %>

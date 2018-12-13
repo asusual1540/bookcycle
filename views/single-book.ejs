@@ -102,47 +102,39 @@
                 <h4>
                   <a style="color:inherit;" href="/book/<%=related_book._id%>">
                     <%=related_book.name%></a>
-
                 </h4>
                 <h5><i>
                     <%=related_book.author%></i></h5>
-
-                <div class="user-reactions">
+                <!-- <div class="user-reactions">
                   <i class="fas fa-thumbs-up"></i>
                   <%=related_book.likes.length%>
-                </div>
-
+                </div> -->
                 <div class="book-desc">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit delectus.
                 </div>
-
                 <button class="btn btn-sm">Buy</button>
-
                 <div class="d-block">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm">Seller</button>
                     <button type="button" class="btn btn-sm">100</button>
                   </div>
-
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm">Reviews</button>
                   </div>
                 </div>
-
-                <!-- <div class="d-block">
+                <div class="d-block">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm">Price Starts From</button>
                     <button type="button" class="btn btn-sm">122 tk</button>
                     <button type="button" class="btn btn-sm">Compare</button>
                   </div>
-                </div> -->
+                </div>
               </div>
             </div>
           </div>
           <% } %>
           <% }) %>
         </div>
-
         <script>
           $(document).ready(function () {
             $('.related-books-slider').slick({
@@ -169,14 +161,20 @@
           });
         </script>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- <div class="reviews mt-5">
+<% include partials/footer %>
+
+
+<!-- <div class="reviews mt-5">
         <h3 class="text-uppercase mb-4">Reviews</h3>
 
         <div class="p-4 bordered">
           <ul class="comment-list">
             <li> -->
-      <!-- <div class="item">
+<!-- <div class="item">
                 <div class="avatar">
                   <img src="https://via.placeholder.com/100x100" alt="" class="img-fluid">
                 </div>
@@ -192,7 +190,7 @@
                 </div>
               </div> -->
 
-      <!-- <ul class="children">
+<!-- <ul class="children">
                 <li>
                   <div class="item">
                     <div class="avatar">
@@ -211,9 +209,9 @@
                   </div>
                 </li>
               </ul> -->
-      <!-- </li> -->
+<!-- </li> -->
 
-      <!-- <li>
+<!-- <li>
               <div class="item">
                 <div class="avatar">
                   <img src="" alt="cant display" class="img-fluid">
@@ -223,7 +221,7 @@
 
                   </h4>
                   <p>Member since
-                    <%=currentUser.date.toString().slice(0, 15)%>
+                    
                   </p>
                   <p>5 Star</p>
                   <div class="desc mt-2">
@@ -234,16 +232,9 @@
                 </div>
               </div>
             </li> -->
-      <!-- </ul> -->
-      <!-- </div> -->
-    </div>
-
-  </div>
-
-  </div>
-</section>
-
-<% include partials/footer %>
+<!-- </ul> -->
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- <div class="item">
     <div class="wrapper">
