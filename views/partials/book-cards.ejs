@@ -1,0 +1,48 @@
+<section class="container book-cards">
+    <h1 class="page-header text-center">Browse Book Store</h1>
+    <div class="row">
+        <div class="col-sm-12 bookcycle-cards">
+            <div class="row">
+                <% docs.forEach((book) => { %>
+                <div class="col-lg-3 col-md-4 col-sm-6 crd">
+                    <div class="book-loop mb-4 crd2">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img class="bookcycle-card-img" src="<%= book.bookImg %>" alt="<%= book.name %>">
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="bookcycle-card buy">
+                                    <div class="bookcycle-card-header">
+                                        <a href="/book/<%=book.id%>" style="color: inherit">
+                                            <h4 class="bookcycle-card-title mb-1">
+                                                <%= book.name %>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div class="bookcycle-card-body">
+                                        <p class="bookcycle-card-author mb-1">
+                                            <%= book.author %>
+                                        </p>
+                                        <p class="bookcycle-card-price mb-1">
+                                            <%= book.price %> &#2547 by
+                                        </p>
+                                        <p class="bookcycle-card-price mb-1">
+                                            <%= book.ownerName %>
+                                        </p>
+                                        <p class="bookcycle-card-price mb-1">
+                                            <%= book.category %>
+                                        </p>
+                                    </div>
+                                    <div class="bookcycle-card-footer"><a href="/book/<%=book.id%>">
+                                            <button class="btn btn-outline-light btn-sm btn-block">Details</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</section>

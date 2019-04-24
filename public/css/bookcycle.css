@@ -1,0 +1,475 @@
+body {
+  background-image: url("../images/bg-pattern-white-dark.svg");
+  background-attachment: fixed;
+}
+
+.bookcycle-header {
+  position: relative;
+  margin-bottom: 50px;
+  border-bottom: 1px solid white;
+}
+
+.bookcycle-header::after {
+  content: none;
+  background-image: url(../images/bulb.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  margin-left: -100px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+}
+.row {
+  /* margin-top: 100px; row is a common class, ei tate extra property add korle ta sob jaygay effect fele. haha ok. */
+}
+.book-cards {
+  margin-top: 50px;
+}
+
+.bookcycle-jumbotron {
+  color: #fff;
+  position: relative;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.bookcycle-jumbotron img {
+  max-width: 75%;
+}
+
+.bookcycle-jumbotron .tt {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.page-header {
+  color: #fff;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.bookcycle-card {
+  color: #fff;
+  border-color: #fff;
+  margin-bottom: 50px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.bookcycle-card ::placeholder {
+  color: #fff;
+}
+
+.bookcycle-card input[type="email"],
+.bookcycle-card input[type="password"],
+.bookcycle-card input[type="text"] {
+  background-color: transparent;
+  color: #fff;
+}
+
+.bookcycle-btn {
+  background-color: #ae0c00;
+  color: #fff;
+  border-color: #fff;
+  	-webkit-box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+	        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  padding: 10px 30px;
+  font-weight: 300;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #ae0c00;
+  border: 0px;
+  cursor: pointer;
+  outline: none;
+}
+
+.bookcycle-btn:hover {
+  background-color: #fff;
+  color: black;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .bookcycle-jumbotron {
+    margin-top: 0px;
+  }
+
+  .bookcycle-jumbotron .desk,
+  .bookcycle-jumbotron .rocket,
+  .bookcycle-jumbotron .stack {
+    margin-bottom: 50px;
+  }
+
+  .bookcycle-jumbotron .rocket {
+    margin-top: 100px;
+  }
+
+  .bookcycle-card {
+    padding: 50px 50px 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .bookcycle-jumbotron .desk,
+  .bookcycle-jumbotron .rocket,
+  .bookcycle-jumbotron .stack {
+    margin-bottom: 50px;
+  }
+
+  .bookcycle-card {
+    padding: 50px 50px 50px;
+  }
+}
+.crd {
+  padding-right: 3px;
+  padding-left: 3px;
+}
+.navbar-nav .nav-item .nav-link:not(.cart-link) {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  text-transform: uppercase;
+}
+.navbar-nav .nav-item .nav-link:not(.cart-link):hover {
+  background-color: #fff;
+  color: black;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.sidebar,
+.sidebar a {
+  color: #fff;
+}
+
+.widget-content .children {
+  margin-left: 25px;
+}
+
+.bookcycle-cards .breadcrumb .breadcrumb-item,
+.bookcycle-cards .breadcrumb .breadcrumb-item a,
+.bookcycle-cards .breadcrumb .breadcrumb-item::before {
+  color: #fff;
+}
+
+
+
+.book-loop {
+  background-color: rgba(139,0,0,.75);
+  color: #fff;
+  padding: 10px;
+  border: .5px solid;
+}
+
+.book-loop .bookcycle-card-img {
+  width: 100%;
+  height: auto;
+}
+
+.book-loop .bookcycle-card-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+.book-loop .bookcycle-card-author {
+  font-size: .75rem;
+  text-transform: capitalize;
+}
+.book-loop .bookcycle-card-price {
+  font-size: .75rem;
+}
+
+.book-loop .bookcycle-card-body {
+  padding: 0rem;
+}
+.bookcycle-card-footer {
+  position : absolute;
+  bottom : 0;
+  width : 90%;
+}
+.bookcycle-card-header {
+  position : absolute;
+  top : 0;
+  width : 90%;
+  height : 20%;
+}
+
+@media (min-width: 768px) {
+  .book-loop .row {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+  .book-loop .col-sm-6 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.user-info .user-name {
+  font-size: 24px;
+}
+
+.category {
+  background-color: rgba(139,0,0,.75);
+  padding-top : 15px;
+  min-height: 375px;
+}
+
+/* .sellbox{
+  width: 50%;
+} */
+
+
+.btn-group{
+  position: absolute;
+  float: right;
+}
+
+.buy {
+  padding: 50px 0px 0px;
+}
+
+.widget-title {
+  color : #fff;
+}
+
+.favBook{
+  margin : 0px 0px;
+  padding : 0px 0px;
+
+}
+.favBooks{
+  font-size: 1rem;
+  border-bottom : 1px solid #fff;
+}
+.fullname{
+  margin-top : 5px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+.form-check {
+  margin-top: 10px;
+}
+
+.book-loop-footer{
+  background-color: rgb(0,0,0,.25);
+  color: #fff;
+  padding: 10px;
+}
+
+
+.book-info .history {
+  padding: 0 45px 10px;
+    border: 1px solid;
+}
+.book-info .history .heading {
+  background-color: rgba(139,0,0,.75);
+  text-align: center;
+  margin-left: -45px;
+  margin-right: -45px;
+  padding: 15px 0;
+    margin-bottom: 15px;
+}
+.book-info .table td {
+  border: none;
+}
+.book-info .table thead th {
+  border-top: none;
+  border-bottom-width: 1px;
+  font-weight: normal;
+}
+.single-book .btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.related-books-slider .btn-group {
+  position: unset;
+  float: unset;
+}
+.related-books-slider .row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+.related-books-slider .item h4 {
+  font-size: 14px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.related-books-slider .item h5 {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: normal;
+}
+.related-books-slider .item .book-desc {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.related-books-slider .item .user-reactions {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.related-books-slider .item .d-block {
+  margin: 5px 0;
+}
+.related-books-slider .item .btn {
+  font-size: 9px;
+  padding: 2px 5px;
+}
+.related-books-slider .item .wrapper {
+  background-color: rgba(139,0,0,.75);
+    border: 1px solid;
+    padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .related-books-slider .item .wrapper::before,
+  .related-books-slider .item .wrapper::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+  .related-books-slider .item .item-image {
+    width: 41.666667%;
+    float: left;
+    padding-right: 10px;
+  }
+  .related-books-slider .item .item-content {
+    width: 58.333333%;
+    float: left;
+  }
+}
+
+.related-books-slider .slick-list {
+    margin: 0 -5px;
+}
+.related-books-slider .item {
+  padding: 0 5px;
+}
+.related-books-slider .slick-arrow {
+background-color: rgba(139,0,0,.75);
+    width: 25px;
+    height: 25px;
+    border-radius: 30px;
+    border: 1px solid;
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    margin-top: -15px;
+}
+.related-books-slider .slick-prev {
+  left: -10px;
+}
+.related-books-slider .slick-next {
+  right: -10px;
+}
+
+.reviews .bordered {
+  border: 1px solid;
+}
+.reviews .comment-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.reviews .comment-list .item {
+  margin-bottom: 50px;
+}
+.reviews .comment-list .item::before,
+.reviews .comment-list .item::after {
+  clear: both;
+  content: '';
+  display: table;
+}
+.reviews .comment-list .avatar {
+  float: left;
+  width: 130px;
+}
+.reviews .comment-list .avatar img {
+  border-radius: 100%;
+}
+.reviews .comment-list .content {
+  float: left;
+  width: calc(100% - 130px);
+}
+.reviews .comment-list p {
+  margin: 0;
+  font-size: 12px;
+}
+.reviews .comment-list .desc {
+  font-size: 14px;
+}
+.reviews .children {
+  margin: 0;
+  list-style-type: none;
+  padding-left: 130px;
+}
+
+.cart-link span {
+  position: relative;
+    width: 20px;
+    display: inline-block;
+    color: #fff;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    top: -10px;
+    left: -13px;
+}
+
+.bookcycle-search-bar {
+  margin-bottom : 30px;
+}
+
+.bookcycle-search-bar .form-control {
+  background-color: transparent;
+  color: #fff;
+  
+}
+
+.bookcycle-search-bar ::placeholder {
+  color: #fff;
+}
+
+.bookcycle-search-bar .input-group-text {
+  background-color: transparent;
+  color: #fff;
+}
+
+
+#inputpassword2{
+  background-color: transparent;
+  color : #fff;
+}
+.form-control {
+  background-color: transparent;
+  color: #fff;
+  border : 1px solid #fff;
+  margin-right : 1rem;
+ 
+}
+
+.title-text {
+  font-size : 1.4rem;
+  font-weight : bold;
+  color: #fff;
+}
+
+.recharge {
+  margin-bottom : 2rem;
+}

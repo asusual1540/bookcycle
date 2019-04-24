@@ -1,0 +1,157 @@
+<% include partials/header %>
+
+<% include partials/main-nav %>
+
+<section class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="sidebar">
+				<section class="widget user-info">
+					<h1 class="title-text">
+						Balance -
+						<%=profile.balance%> tk
+					</h1>
+					<div class="widget-content">
+						<% if (profile.profilePic) { %>
+						<img class="img-fluid" src="<%= profile.profilePic %>" alt="">
+						<h1 class="title-text">
+							<%= profile.fullName %>
+						</h1>
+						<h6 class="">
+							<%= profile.status %>
+						</h6>
+						<div>
+							<h2 class="favBooks">
+								Favourite Books
+							</h2>
+							<% profile.favouriteBooks.forEach(book => { %>
+							<p class="favBook">
+								<%= book %>
+							</p>
+							<% }) %>
+						</div>
+						<div>
+							<h2 class="favBooks">
+								Favourite Authors
+							</h2>
+							<% profile.favouriteAuthors.forEach(author => { %>
+							<p class="favBook">
+								<%= author %>
+							</p>
+							<% }) %>
+						</div>
+						<% } else { %>
+						<% if (currentUser.local) { %>
+						<img class="img-fluid" src="/images/avatar-b.png">
+						<h1 class="user-name text-uppercase mt-4">
+							<%= profile.fullName %>
+						</h1>
+						<h6 class="">
+							<%= profile.status %>
+						</h6>
+						<div>
+							<h2 class="favBooks">
+								Favourite Books
+							</h2>
+							<% profile.favouriteBooks.forEach(book => { %>
+							<p class="favBook">
+								<%= book %>
+							</p>
+							<% }) %>
+						</div>
+						<div>
+							<h2 class="favBooks">
+								Favourite Authors
+							</h2>
+							<% profile.favouriteAuthors.forEach(author => { %>
+							<p class="favBook">
+								<%= author %>
+							</p>
+							<% }) %>
+						</div>
+						<% } else { %>
+						<img class="img-fluid" src="<%= currentUser.facebook.profilePic || currentUser.google.profilePic %>">
+						<h1 class="user-name text-uppercase mt-4">
+							<%= profile.fullName %>
+						</h1>
+						<% } %>
+
+						<% } %>
+						<div class="form-group sell-btn">
+							<a href="/editProfile"><button type="submit" class="btn bookcycle-btn">Edit Profile</button></a>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+
+
+		<div class="col-sm-9 bookcycle-cards">
+			<div class="recharge">
+				<h1 class="title-text">Recharge My Account</h1>
+				<form class="form-inline" action="/add-fund/" method="POST">
+					<div class="form-group mx-sm-3 mb-2 sell-btn">
+						<input type="text" class="form-control tr" id="inputPassword2" placeholder="Transaction ID">
+						<input type="text" class="form-control am" name="amount" id="inputPassword2" placeholder="Amount">
+						<button type="submit" class="btn btn-outline-light add-fund">Add</button>
+					</div>
+				</form>
+			</div>
+			<!-- <nav aria-label="breadcrumb">
+				<ol class="breadcrumb bg-transparent p-0">
+					<li class="breadcrumb-item"><a href="#">Author</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Humayun Ahmed</li>
+				</ol>
+			</nav> -->
+			<h1 class="title-text">My Listed Books On Sale</h1>
+			<% if (!docs) { %>
+			<h1 class="title-text">No Books</h1>
+			<% }else if (!profile) { %>
+			<h3 class="widget-title">First time Login? Setup Profile Now</h3>
+			<div class="form-group sell-btn">
+				<a href="/editProfile"><button type="submit" class="btn bookcycle-btn">Setup Profile Now</button></a>
+			</div>
+			<% } else { %>
+			<div class="row">
+				<% docs.forEach((book) => { %>
+				<div class="col-lg-4 col-md-4 col-sm-6 crd">
+					<div class="book-loop mb-4 crd2">
+						<div class="row">
+							<div class="col-sm-6">
+								<img class="bookcycle-card-img" src="<%= book.bookImg %>" alt="<%= book.name %>">
+							</div>
+							<div class="col-sm-6">
+								<div class="bookcycle-card buy">
+									<div class="bookcycle-card-header">
+										<h4 class="bookcycle-card-title mb-1">
+											<%= book.name %>
+										</h4>
+									</div>
+									<div class="bookcycle-card-body">
+										<p class="bookcycle-card-author mb-1">
+											<%= book.author %>
+										</p>
+										<p class="bookcycle-card-price mb-1">
+											<%= book.price %> &#2547 by
+										</p>
+										<p class="bookcycle-card-price mb-1">
+											<%= book.ownerName  %>
+										</p>
+									</div>
+									<div class="bookcycle-card-footer">
+										<a href="/delete-book/<%=book.id%>"><button class="btn btn-outline-light btn-sm btn-block">Withdraw</button></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<% }) %>
+			</div>
+			<% } %>
+		</div>
+	</div>
+</section>
+
+<% include partials/footer %>

@@ -1,0 +1,72 @@
+<% include partials/header %>
+
+<% include partials/main-nav %>
+
+<section class="container">
+
+  <div class="card bookcycle-card bg-transparent">
+    <h1 class="page-header text-center">My Cart</h1>
+    <%if (products) { %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>QTY</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% products.forEach( product=>{ %>
+        <tr>
+          <td>
+            <%=product.item.name%>
+          </td>
+          <td>
+            <%=product.qty%>
+          </td>
+          <td>
+            <%=product.price%>
+          </td>
+          <td>
+            <a href="/reduce/<%=product.item._id%>" class="btn btn-danger">Discard</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+
+    </table>
+    <div class="clearfix">
+      <div class="float-sm-left">Total Quantity
+        <%=totalQty%>
+      </div>
+      <br>
+
+      <div class="float-sm-left">Total Price
+        <%=totalprice%>
+      </div>
+      <br>
+
+      <div class="float-sm-left">Available Balance:
+        <%=profile.balance%> tk</div>
+      <div class="float-sm-right">
+        <a href="/buy" class="btn btn-success">Continue Shopping</a>
+        <a href="/cart" class="btn btn-success">Checkout</a>
+      </div>
+    </div>
+    <% } else { %>
+    <h2 style="text-align : center">NO ITEMS IN YOUR CART</h2>
+    <% } %>
+
+  </div>
+
+  <br>
+  <br>
+
+  <br>
+  <br>
+
+</section>
+
+<% include partials/footer %>

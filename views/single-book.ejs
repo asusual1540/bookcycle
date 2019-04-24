@@ -1,0 +1,283 @@
+<% include partials/header %>
+
+<% include partials/main-nav %>
+
+<section class="container">
+  <div class="row">
+
+    <div class="col-sm-12 single-book text-white">
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="book-image">
+            <img src="<%= book.bookImg %>" height="480" width="300" alt="" class="img-fluid">
+          </div>
+        </div>
+
+        <div class="col-md-8">
+
+          <div class="book-info">
+
+            <h1 class="display-5">
+              <%= book.name %>
+            </h1>
+            <h4>
+              <%= book.author %>
+            </h4>
+            <!-- <div class="user-reactions"><a href="/book/like/<%=book._id%>"><i class="fas fa-thumbs-up"></i></a>
+
+              <%=book.likes.length%>
+            </div> -->
+
+            <div class="history mt-4">
+
+              <div class="heading">Sellers</div>
+
+              <div class="sorting clearfix mb-3">
+
+                <!-- <div class="float-sm-right">
+                  Filter
+                  <select name="sort_by" id="sory_by">
+                    <option value="lowest_price_first">Lowest Price First</option>
+                    <option value="date_desc">Date</option>
+                  </select>
+                </div> -->
+
+              </div>
+
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <!-- <th>Address</th> -->
+                    <th>Price</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% books.forEach((book) => { %>
+                  <tr>
+                    <td>
+                      <%= book.ownerName%>
+                    </td>
+                    <td>
+                      <%= book.date.toString().slice(0, 15)%>
+                    </td>
+                    <!-- <td>
+                      <%= book.user.id%>
+                    </td> -->
+                    <td>
+                      <%= book.price%>
+                    </td>
+                    <td><a href="/add-to-cart/<%=book._id%>"><button class="btn btn-sm">Buy</button></a></td>
+                  </tr>
+                  <% })%>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!-- more like this starts -->
+      <div class="related-books mt-5">
+        <h3 class="text-uppercase mb-4 text-center">More like this</h3>
+
+        <div class="related-books-slider">
+          <% related_books.forEach((related_book) => { %>
+          <% if (related_book.name != book.name) { %>
+          <div class="item">
+            <div class="wrapper">
+
+              <div class="item-image">
+                <img src="<%=related_book.bookImg%>" alt="" class="img-fluid">
+              </div>
+
+              <div class="item-content">
+                <h4>
+                  <a style="color:inherit;" href="/book/<%=related_book._id%>">
+                    <%=related_book.name%></a>
+                </h4>
+                <h5><i>
+                    <%=related_book.author%></i></h5>
+                <!-- <div class="user-reactions">
+                  <i class="fas fa-thumbs-up"></i>
+                  <%=related_book.likes.length%>
+                </div> -->
+                <div class="book-desc">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit delectus.
+                </div>
+                <button class="btn btn-sm">Buy</button>
+                <div class="d-block">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm">Seller</button>
+                    <button type="button" class="btn btn-sm">100</button>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm">Reviews</button>
+                  </div>
+                </div>
+                <div class="d-block">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm">Price Starts From</button>
+                    <button type="button" class="btn btn-sm">122 tk</button>
+                    <button type="button" class="btn btn-sm">Compare</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+          <% }) %>
+        </div>
+        <script>
+          $(document).ready(function () {
+            $('.related-books-slider').slick({
+              infinite: true,
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              prevArrow: '<button type="button" class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+              nextArrow: '<button type="button" class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+              responsive: [
+                {
+                  breakpoint: 992,
+                  settings: {
+                    slidesToShow: 2
+                  }
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 1
+                  }
+                },
+              ]
+            });
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% include partials/footer %>
+
+
+<!-- <div class="reviews mt-5">
+        <h3 class="text-uppercase mb-4">Reviews</h3>
+
+        <div class="p-4 bordered">
+          <ul class="comment-list">
+            <li> -->
+<!-- <div class="item">
+                <div class="avatar">
+                  <img src="https://via.placeholder.com/100x100" alt="" class="img-fluid">
+                </div>
+                <div class="content">
+                  <h4>Moyeen Uddin</h4>
+                  <p>Member since 5th July, 2018</p>
+                  <p>5 Star</p>
+                  <div class="desc mt-2">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, eos ipsa similique quas dolor
+                    autem! Architecto nostrum dolorum dolore animi suscipit aspernatur, optio dolor. Distinctio
+                    expedita veritatis perferendis quaerat hic!
+                  </div>
+                </div>
+              </div> -->
+
+<!-- <ul class="children">
+                <li>
+                  <div class="item">
+                    <div class="avatar">
+                      <img src="https://via.placeholder.com/100x100" alt="" class="img-fluid">
+                    </div>
+                    <div class="content">
+                      <h4>Samir Ashraf</h4>
+                      <p>Member since 5th July, 2018</p>
+                      <p>5 Star</p>
+                      <div class="desc mt-2">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, eos ipsa similique quas dolor
+                        autem! Architecto nostrum dolorum dolore animi suscipit aspernatur, optio dolor. Distinctio
+                        expedita veritatis perferendis quaerat hic!
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul> -->
+<!-- </li> -->
+
+<!-- <li>
+              <div class="item">
+                <div class="avatar">
+                  <img src="" alt="cant display" class="img-fluid">
+                </div>
+                <div class="content">
+                  <h4>
+
+                  </h4>
+                  <p>Member since
+                    
+                  </p>
+                  <p>5 Star</p>
+                  <div class="desc mt-2">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, eos ipsa similique quas dolor
+                    autem! Architecto nostrum dolorum dolore animi suscipit aspernatur, optio dolor. Distinctio
+                    expedita veritatis perferendis quaerat hic!
+                  </div>
+                </div>
+              </div>
+            </li> -->
+<!-- </ul> -->
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- <div class="item">
+    <div class="wrapper">
+
+      <div class="item-image">
+        <img src="https://via.placeholder.com/138x285" alt="" class="img-fluid">
+      </div>
+
+      <div class="item-content">
+        <h4>Stranger in the Mirror</h4>
+        <h5><i>Sydney Sheldon</i></h5>
+
+        <div class="user-reactions">
+          <i class="fas fa-thumbs-up"></i> 1123
+          <i class="fas fa-thumbs-down"></i> 12
+        </div>
+
+        <div class="book-desc">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis suscipit delectus esse molestias porro
+          obcaecati similique ipsam inventore repellendus aliquam quo tenetur.
+        </div>
+
+        <button class="btn btn-sm">Buy</button>
+
+        <div class="d-block">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm">Seller</button>
+            <button type="button" class="btn btn-sm">12</button>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm">Reviews</button>
+            <button type="button" class="btn btn-sm">Add</button>
+          </div>
+        </div>
+
+        <div class="d-block">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm">Price Starts From</button>
+            <button type="button" class="btn btn-sm">122 tk</button>
+            <button type="button" class="btn btn-sm">Compare</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->

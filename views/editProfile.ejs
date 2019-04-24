@@ -1,0 +1,57 @@
+<% include partials/header %>
+
+<% include partials/main-nav %>
+
+<section class="container">
+	<div class="row">
+		<div class="col-sm-12 bookcycle-cards">
+			<h1 class="page-header text-center">Edit Profile</h1>
+			<div class="card bookcycle-card bg-transparent">
+				<form class="sell-form" action="/myProfile" method="POST" enctype="multipart/form-data">
+					<div class="row">
+						<div class="form-group col-md-6">
+							<input type="text" name="fullName" class="form-control sellbox" placeholder="Full Name (Required)">
+						</div>
+						<div class="form-group col-md-6">
+							<input type="text" name="status" class="form-control sellbox" placeholder="Status (Required)">
+						</div>
+						<div class="form-group col-md-6">
+							<input type="text" name="favouriteAuthors" class="form-control sellbox" placeholder="Favourite Authors (optional)">
+						</div>
+						<div class="form-group col-md-6">
+							<input type="text" name="favouriteBooks" class="form-control sellbox" placeholder="Favourite Books (optional)">
+						</div>
+						<div class="form-group col-md-6">
+							<input type="text" name="nationalID" class="form-control sellbox" placeholder="NationalID (Required)">
+						</div>
+						<div class="form-group col-md-6">
+							<input type="text" name="location" class="form-control sellbox" placeholder="Address (Required)">
+						</div>
+						<div class="form-group col-md-6">
+							<div class="inner-wrap">
+								<label for="">Profile Picture (optional)</label>
+								<br>
+								<input type="file" id="photo" name="photo" />
+							</div>
+							<div class="form-check">
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<select id="inputState" name="gender" class="form-control">
+								<option selected>Male</option>
+								<option>Female</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="form-group sell-btn">
+						<button type="submit" class="btn bookcycle-btn">Submit</button>
+						<button type="submit" class="btn bookcycle-btn">Home</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<% include partials/footer %>
