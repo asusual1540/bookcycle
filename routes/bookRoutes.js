@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require("express");
 const router = express.Router();
 const { Book } = require("../server/models/book");
@@ -347,11 +348,6 @@ router.get("/delete-book/:id", (req, res) => {
     book.remove();
     res.redirect("/myProfile");
   });
-});
-
-router.get("/api/books", async (req, res) => {
-  const books = await Book.find();
-  res.status(200).send({ books });
 });
 
 module.exports = router;

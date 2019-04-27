@@ -26,7 +26,6 @@ Mongoose.connect(
 require('./server/auth/passport')(passport)
 
 
-
 app.use(express.static(__dirname + "/public"))
 
 app.use(cookieParser())
