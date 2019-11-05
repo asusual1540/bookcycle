@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require("express");
 const router = express.Router();
 const { Book } = require("../server/models/book");
@@ -296,14 +295,12 @@ router.get("/add-to-cart/:id", (req, res) => {
   if (!req.user) {
     res.redirect("/login");
   }
-
   Book.findById(productId).then(book => {
     if (!book) {
       res.json({ msg: "no book" });
     }
     cart.add(book, book.id);
     req.session.cart = cart;
-    console.log(req.session.cart.item);
     res.redirect("/buy");
   });
 });
@@ -321,7 +318,7 @@ router.get("/cart", (req, res) => {
   if (!req.session.cart) {
     return res.render("cart.ejs", { products: null });
   }
-  var cart = new Cart(req.session.cart);
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
   var products = cart.generateArray();
   Profile.findOne({ user: req.user.id }).then(profile => {
     res.render("cart.ejs", {
@@ -331,6 +328,20 @@ router.get("/cart", (req, res) => {
       profile: profile
     });
   });
+});
+
+router.get("/cart/checkout", async (req, res) => {
+  if (!req.session.cart) {
+    return res.render("cart.ejs", { products: null });
+  }
+
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  var products = cart.generateArray();
+  console.log("products")
+  console.log(products)
+  buyer = await Profile.findOne({ user: req.user.id })
+  console.log(`buyer = ${buyer}`)
+  res.redirect("/cart");
 });
 
 router.get("/delete-book/:id", (req, res) => {

@@ -51,26 +51,26 @@ router.post('/signup', passport.authenticate('local-signup', {
 // facebook -------------------------------------------------------------------
 // send to facebook to do the authentication
 
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'email'] }))
+// router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'email'] }))
 
-// handle the callback after facebook has authenticated the user
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    }))
+// // handle the callback after facebook has authenticated the user
+// router.get('/auth/facebook/callback',
+//     passport.authenticate('facebook', {
+//         successRedirect: '/',
+//         failureRedirect: '/login'
+//     }))
 
-// google ----------------------------------------------------------------------
+// // google ----------------------------------------------------------------------
 
-// send to google to do the authentication
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
+// // send to google to do the authentication
+// router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
-// the callback after google has authenticated the user
-router.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    }))
+// // the callback after google has authenticated the user
+// router.get('/auth/google/callback',
+//     passport.authenticate('google', {
+//         successRedirect: '/',
+//         failureRedirect: '/login'
+//     }))
 
 // =============================================================================
 // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
@@ -89,27 +89,27 @@ router.post('/connect/local', passport.authenticate('local-signup', {
 // facebook -------------------------------
 
 // send to facebook to do the authentication
-router.get('/connect/facebook', passport.authorize('facebook', { scope: ['public_profile', 'email'] }))
+// router.get('/connect/facebook', passport.authorize('facebook', { scope: ['public_profile', 'email'] }))
 
-// handle the callback after facebook has authorized the user
-router.get('/connect/facebook/callback',
-    passport.authorize('facebook', {
-        successRedirect: '/profile',
-        failureRedirect: '/'
-    }))
+// // handle the callback after facebook has authorized the user
+// router.get('/connect/facebook/callback',
+//     passport.authorize('facebook', {
+//         successRedirect: '/profile',
+//         failureRedirect: '/'
+//     }))
 
 
 // google ---------------------------------
 
 // send to google to do the authentication
-router.get('/connect/google', passport.authorize('google', { scope: ['profile', 'email'] }))
+// router.get('/connect/google', passport.authorize('google', { scope: ['profile', 'email'] }))
 
-// the callback after google has authorized the user
-router.get('/connect/google/callback',
-    passport.authorize('google', {
-        successRedirect: '/profile',
-        failureRedirect: '/'
-    }))
+// // the callback after google has authorized the user
+// router.get('/connect/google/callback',
+//     passport.authorize('google', {
+//         successRedirect: '/profile',
+//         failureRedirect: '/'
+//     }))
 
 // =============================================================================
 // UNLINK ACCOUNTS =============================================================
@@ -128,23 +128,23 @@ router.get('/unlink/local', isLoggedIn, function (req, res) {
     })
 })
 
-// facebook -------------------------------
-router.get('/unlink/facebook', isLoggedIn, function (req, res) {
-    var user = req.user
-    user.facebook.token = undefined
-    user.save(function (err) {
-        res.redirect('/profile')
-    })
-})
+// // facebook -------------------------------
+// router.get('/unlink/facebook', isLoggedIn, function (req, res) {
+//     var user = req.user
+//     user.facebook.token = undefined
+//     user.save(function (err) {
+//         res.redirect('/profile')
+//     })
+// })
 
-// google ---------------------------------
-router.get('/unlink/google', isLoggedIn, function (req, res) {
-    var user = req.user
-    user.google.token = undefined
-    user.save(function (err) {
-        res.redirect('/profile')
-    })
-})
+// // google ---------------------------------
+// router.get('/unlink/google', isLoggedIn, function (req, res) {
+//     var user = req.user
+//     user.google.token = undefined
+//     user.save(function (err) {
+//         res.redirect('/profile')
+//     })
+// })
 
 
 

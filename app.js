@@ -21,7 +21,7 @@ const config = require("./server/config/config")
 Mongoose.Promise = global.Promise
 Mongoose.connect(
   config.mongoURI,
-  { useNewUrlParser: true }
+  { useNewUrlParser: true, useUnifiedTopology: true }
 )
 require('./server/auth/passport')(passport)
 
